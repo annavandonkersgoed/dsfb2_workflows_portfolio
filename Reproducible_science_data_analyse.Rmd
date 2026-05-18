@@ -3,4 +3,33 @@ title: "Reproducible_science_data_analyse"
 output: html_document
 ---
 
-Hier komt de data analyse van een andere 
+```{r c.elegans, include=FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(scales)
+```
+
+Voor wetenschap is het belangrijk dat experimenten reproduceerbaar zijn. Hieronder valt ook de data analyse. In dit gedeeldte van het portfolio wordt data van een uitgevoerd experiment geanalyseerd om te laten zien dat er reproduceerbaar gewerkt kan worden.
+
+Het doel van het experiment was om te kijken welke stoffen invloed hebben op de nakomelingen van *C. elegans* Dit werd gedaan door de nematoden bloot te stellen aan verschillende concentraties van verschillende stoffen. Het aantal nakomelingen is geteld. De data uit dit experiment wordt geanalyseerd.
+
+Het experiment is uitgevoerd door J. Louter (INT/ILC) en de data is afkomstig van het HU lectoraat Innovative Testing in Life Sciences & Chemistry.
+
+De belangrijke variabelen in dit experiment zijn:
+
+-   "RawData": de ruwe data
+-   "compName": de naam van de stof
+-   "compConcentration": de concentratie van de stof
+
+De eerste stap is het inlezen van de data 
+```{r, inlezen excel}
+Celegans_dataset <- read_excel(here::here("Data", "data_raw", "Data010", "CE.LIQ.FLOW.062_Tidydata.xlsx"), sheet = 1)
+```
+
+Na het inlezen van de data wordt de data gecontroleerd op het type.
+
+```{r, controleren data, eval = FALSE}
+str(Celegans_dataset)
+```
