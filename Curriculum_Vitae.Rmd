@@ -3,12 +3,22 @@ title: "Curriculum_Vitae"
 output: html_document
 ---
 
-# Cirriculum Vitea 
+# Cirriculum Vitea
 
-```{r setup, include = FALSE}
+`{knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)}`
 
-```
+Mijn naam is Anna en ik ben vierdejaars bachelor student Life Sciences aan de Hogeschool Utrecht met een specialisatie in Microbiologie en een minor in Data Science. Ik ben sociaal, gemotiveerd en nieuwsgierig en ik kijk er heel erg naar uit om mijn kennis in de praktijk toe te passen.
 
-Mijn naam is Anna en ik ben vierdejaars bachelor student Life Sciences aan de Hogeschool Utrecht met een specialisatie in Microbiologie en een minor in Data Science. Ik ben sociaal, gemotiveerd en nieuwsgierig en ik kijk er heel erg naar uit om mijn kennis in de praktijk toe te passen. 
+**Contactgegevens**
 
-**Contactgegevens** 
+-   Naam: Anna van Donkersgoed
+
+-   Mail: anna.van.donkersgoed\@student.hu.nl
+
+**Talen**
+
+-   Nederlands (moedertaal)
+
+-   Engels
+
+**Opleidingen**
