@@ -1,0 +1,8 @@
+---
+title: "Geparametrizeerde_markdown"
+output: html_document
+---
+
+Laten zien dat er met parameters gewerkt kan worden 
+
+Maak een video waarin te zien is dat de parameters aangepast kunnen worden en de data veranderd. Maak eerst een markdown bestand zonder parameters, daarna kunnen de onderdelen worden vervangen door parameters. 

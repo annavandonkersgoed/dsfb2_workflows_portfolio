@@ -1,0 +1,6 @@
+---
+title: "R package"
+output: html_document
+---
+
+Hier komt de informatie over de gemaakte R package 

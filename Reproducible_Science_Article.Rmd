@@ -1,0 +1,6 @@
+---
+title: "Reproducible_Science_Article"
+output: html_document
+---
+
+Hier komt de reproduceerbaarheid van een gekozen artikel 

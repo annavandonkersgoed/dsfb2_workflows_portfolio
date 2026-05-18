@@ -3,3 +3,6 @@ title: "Data_management_portfolio"
 output: html_document
 ---
 
+-Screenshot can inhoud README
+-Screenshot van mapstructuur 
+
