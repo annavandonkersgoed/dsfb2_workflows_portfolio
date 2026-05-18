@@ -24,7 +24,7 @@ Mijn naam is Anna en ik ben vierdejaars bachelor student Life Sciences aan de Ho
 **Opleidingen**
 
 | Jaar | Diploma | School | Plaats |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | 2020-heden | Life Sciences | Hogeschool Utrecht | Utrecht, Nederland |
 | 2021 | Propedeuse Life Sciences | Hogeschool Utrecht | Utrecht, Nederland |
 | 2015-2020 | HAVO | Anna van Rijn college | Nieuwegein, Nederland |
@@ -56,6 +56,29 @@ Project Parodontitis
 -   Ontwikkeling van een bioinformatica pipeline voor analyse van antimicrobiële resistentie.
 -   Data visualisatie d.m.v. een interactieve R shiny app.
 -   Toepassing van GitHub.
--   Projectplanning en samenwerken in een Agile omgeving. 
+-   Projectplanning en samenwerken in een Agile omgeving.
 
 **Werkervaring**
+
+| Jaar | Functie | Bedrijf | Plaats |
+|----|----|----|----|
+| 2025 | Medewerker centrale omsterontvanges | AQUON | Houten, Utrecht |
+| 2022-2024 | Horecamedewerker | DE KOM, stadstheater en kunstcentrum | Nieuwegein, Utrecht |
+| 2019-2021 | Vakkenvuller | Boon's mark | Nieuwegein, Utrecht |
+
+**Vrijwilligerswerk**
+
+| Jaar | Vrijwilligerswerk | Organisatie | Plaats |
+|----|----|----|----|
+| 2021-2025 | Leiding, leeftijd 7-12 jaar | Scouting Jan van Hoof | Nieuwegein, Utrecht |
+| 2019-2021 | Leiding, leeftijd 5-7 jaar | Scouting Jan van Hoof | Nieuwegein, Utrecht |
+
+**Competenties**
+
+-   Flexibel
+
+-   Oplossingsgericht
+
+-   Samenwerken
+
+-   Organiseren
