@@ -24,7 +24,7 @@ Mijn naam is Anna en ik ben vierdejaars bachelor student Life Sciences aan de Ho
 **Opleidingen**
 
 | Jaar | Diploma | School | Plaats |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | 2020-heden | Life Sciences | Hogeschool Utrecht | Utrecht, Nederland |
 | 2021 | Propedeuse Life Sciences | Hogeschool Utrecht | Utrecht, Nederland |
 | 2015-2020 | HAVO | Anna van Rijn college | Nieuwegein, Nederland |
@@ -32,27 +32,30 @@ Mijn naam is Anna en ik ben vierdejaars bachelor student Life Sciences aan de Ho
 **Technieken en vaardigheden**
 
 -   MALDI-TOF
-
 -   PCR
-
 -   Vitek
-
 -   Bacteriekweek + anaëroob kweken
-
 -   MIC bepaling
-
--   Celkweek
-
--   NGS dataverwerking
-
+-   CelkweekNGS
+-   dataverwerking
 -   Metagenomics dataverwerking
-
 -   R
-
 -   bask
-
 -   Excel
 
 **Project vaardigheden**
 
 Project Parodontitis
+
+-   Effect van ijzer op de binding van *Porphyromonas gingivalis* aan verschillende aan verschillende oppervlakten.
+-   Toepassing van anaërobe technieken (bactron600).
+-   Ontwikkeling van flexibiliteit in een onderzoeksaanpak.
+
+**Project Antimicrobiële resistentie**
+
+-   Ontwikkeling van een bioinformatica pipeline voor analyse van antimicrobiële resistentie.
+-   Data visualisatie d.m.v. een interactieve R shiny app.
+-   Toepassing van GitHub.
+-   Projectplanning en samenwerken in een Agile omgeving. 
+
+**Werkervaring**
