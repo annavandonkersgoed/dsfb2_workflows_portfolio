@@ -23,7 +23,8 @@ De belangrijke variabelen in dit experiment zijn:
 -   "compName": de naam van de stof
 -   "compConcentration": de concentratie van de stof
 
-De eerste stap is het inlezen van de data 
+De eerste stap is het inlezen van de data
+
 ```{r, inlezen excel}
 Celegans_dataset <- read_excel(here::here("Data", "data_raw", "Data010", "CE.LIQ.FLOW.062_Tidydata.xlsx"), sheet = 1)
 ```
@@ -50,7 +51,8 @@ Celegans_dataset$compConcentration <- as.numeric(Celegans_dataset$compConcentrat
 Celegans_dataset_no.na <- Celegans_dataset %>% filter(!is.na(RawData))
 ```
 
-Na het veranderen van de data wordt de data in een grafiek weergeven. 
+Na het veranderen van de data wordt de data in een grafiek weergeven.
+
 ```{r, message=FALSE}
 
 #Om ervoor te zorgen dat de dataset niet door 0 heen gaat voor de output van de grafiek 
@@ -69,7 +71,49 @@ Celegans_plot <- ggplot(data = Celegans_dataset_no.na, aes(x = compConcentration
 Celegans_plot
 ```
 
+Normalisatie: Als laatste stap wordt de data genormaliseerd op een manier waardoor de negatieve controle gelijk is aan 1 en de rest wordt uitgedrukt als een fractie daarvan. Dit wordt gedaan zodat de data makkelijker kan worden vergeleken met de negatieve controle om een verschil te zien in de grafiek.
+
+Eerst wordt de data veranderd zodat de negatieve controle gelijk is aan 1 en de ander data een fractie daarvan.
+
+```{r}
+#Berekenen van het gemiddelde van de negatieve controle 
+Celegans_negative <- Celegans_dataset_no.na %>%
+  filter(expType == "controlNegative")
+mean_control_negative <- mean(Celegans_negative$RawData)
+#Gemiddelde van de negatieve controle is 85.9
+Celegans_dataset_norm <- Celegans_dataset_no.na
+
+#Zorg ervoor dat de data 1 is door alle waarden door het gemiddelde te delen 
+Celegans_dataset_norm$RawData <- (Celegans_dataset_norm$RawData / mean_control_negative)
+
+```
+
+Daarna wordt er een grafiek gemaakt van de genormaliseerde dat (AI werd gebruikt om te helpen met de berekeningen om de data te normaliseren)
+
+```{r }
+Celegans_dataset_norm$compConcentration_offset <- Celegans_dataset_norm$compConcentration + 0.001
+
+Celegans_plot_normalized <- ggplot(data = Celegans_dataset_norm, aes(x = compConcentration_offset, y = RawData)) +
+  geom_jitter(aes(color = compName, shape = expType), size = 3, alpha = 0.8, width = 0.1, height = 0) +
+  scale_x_log10(labels = label_log(digits = 2)) +
+  labs(title = "Fractie van aantal nakomelingen C.elegans na incubatie",
+       subtitle = "Aantal nakomelingen van de C.elegans na de incubatie met verschillende stoffen",
+       y = "Fractie aantal nakomelingen",
+       x = "Concentratie (nM) ") +
+  theme_classic()
+Celegans_plot_normalized
+```
+
+Er zijn verschillende controles aanwezig in het experiment.
+
+-   Positieve controle: De positieve controle is de conditie waarbij er een positief resultaat wordt verwacht. In dit geval zal de controle wel een effect hebben op het aantal nakomelingen van de *C.elegans*
+
+-   Negatieve controle: De negatieve controle is de conditie waarbij er een negatief resultaat wordt verwacht. In dit geval zal de negatieve controle geen effect hebben op het aantal nakomelingen van de *C.elegans*
+
+-   Vehicle controle: De vehicle controle geeft aan of de substantie waarmee de getetste stoffen zijn opgelost invloed heeft op het experiment.
+
 Uit de bovenstaande grafiek is te zien dat de positieve controle voor het experiment Ethanol is en de negatieve controle S-medium. Dit kan ook gecheckt worden met de volgende code:
+
 ```{r controle}
 #Check wat de negatieve controle is voor het experiment 
 Celegans_dataset_no.na %>% filter(expType ==  "controlNegative") %>% select(compName) %>% slice(1)
@@ -77,4 +121,10 @@ Celegans_dataset_no.na %>% filter(expType ==  "controlNegative") %>% select(comp
 #check wat de positieve controle is voor het experiment 
 Celegans_dataset_no.na %>% filter(expType ==  "controlPositive") %>% select(compName) %>% slice(1)
 
+```
 
+**Stappenplan voor vervolgonderzoek** 
+
+Als vervolg experiment zou eeen dosis response analyse uitgevoerd kunnen worden.Hiervoor wordt het gemiddelde van de datapunten gebruikt als weergaven. 
+
+Explain the functions of the package here 

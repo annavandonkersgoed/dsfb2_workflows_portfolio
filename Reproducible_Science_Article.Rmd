@@ -3,4 +3,8 @@ title: "Reproducible_Science_Article"
 output: html_document
 ---
 
-Hier komt de reproduceerbaarheid van een gekozen artikel 
+In dit gedeelte van het portfolio wordt er gekeken naar reproduceerbaarheid vanuit artikelen die online staan. 
+
+# part 1 
+
+Differences in the subgingival microbiome according to stage of periodontitis: A comparison of two geographic regions. Dit artikel doornemen 
