@@ -33,3 +33,48 @@ Na het inlezen van de data wordt de data gecontroleerd op het type.
 ```{r, controleren data, eval = FALSE}
 str(Celegans_dataset)
 ```
+
+Er zijn een paar data type die veranderd moeten worden. De ruwe data is als double maar moet een integer worden aangezien het hele getallen zijn. De concentratie is als character weergeven maar moet als numeric omdat het decimalen heeft. Als laatst moet de naam van de stof worden veranderd naar een factor omdat het categorische data is.
+
+```{r datatype}
+#RawData veranderen van dbl naar int 
+Celegans_dataset$RawData <- as.integer(Celegans_dataset$RawData)
+
+#compName veranderen van character naar factor 
+Celegans_dataset$compName <- as.factor(Celegans_dataset$compName)
+
+#compConcentration veranderen van character naar numeric 
+Celegans_dataset$compConcentration <- as.numeric(Celegans_dataset$compConcentration)
+
+#Verwijder NA waarden
+Celegans_dataset_no.na <- Celegans_dataset %>% filter(!is.na(RawData))
+```
+
+Na het veranderen van de data wordt de data in een grafiek weergeven. 
+```{r, message=FALSE}
+
+#Om ervoor te zorgen dat de dataset niet door 0 heen gaat voor de output van de grafiek 
+Celegans_dataset_no.na$compConcentration_offset <- Celegans_dataset_no.na$compConcentration + 0.001
+
+#Plot met de aangepaste C.elegans data met het gebruik van geom jitter 
+Celegans_plot <- ggplot(data = Celegans_dataset_no.na, aes(x = compConcentration_offset, y = RawData)) +
+  geom_jitter(aes(color = compName, shape = expType), size = 3, alpha = 0.8, width = 0.1, height = 0) +
+  scale_x_log10(labels = label_log(digits = 2)) +
+  labs(title = "Aantal nakomelingen C.elegans na incubatie",
+       subtitle = "Aantal nakomelingen van de C.elegans na de incubatie met verschillende stoffen",
+       y = "Aantal nakomelingen",
+       x = "Log 10 concentratie (nM) ") +
+  theme_classic()
+
+Celegans_plot
+```
+
+Uit de bovenstaande grafiek is te zien dat de positieve controle voor het experiment Ethanol is en de negatieve controle S-medium. Dit kan ook gecheckt worden met de volgende code:
+```{r controle}
+#Check wat de negatieve controle is voor het experiment 
+Celegans_dataset_no.na %>% filter(expType ==  "controlNegative") %>% select(compName) %>% slice(1)
+
+#check wat de positieve controle is voor het experiment 
+Celegans_dataset_no.na %>% filter(expType ==  "controlPositive") %>% select(compName) %>% slice(1)
+
+
