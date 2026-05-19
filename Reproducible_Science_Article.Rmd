@@ -5,6 +5,7 @@ output: html_document
 
 In dit gedeelte van het portfolio wordt er gekeken naar reproduceerbaarheid vanuit artikelen die online staan. Eerst wordt het artikel gelezen en wordt er een samenvatting over gemaakt. 
 
+## Artikel informatie 
 
 Artikel: Small Intestine Bacterial Overgrowth is associated with increased Campylobacter and epithelial injury in duodenal biopsies of Bangladeshi children
 
@@ -14,6 +15,12 @@ De kinderen werden geselecteerd op bepaalde ciriteria, esophagogastroduodenoscop
 
 Van de geteste kinderen hadden 12.7% SIBO, en er werd geen significan verschil gevonden tussen de histologische elementen tussen SIBO positieve en SIBO negatieve kinderen. Wat opviel was dat kinderen met SIBO een veel hogere abundantie hadden in Campylobacter dan kinderen zonder SIBO en dat verhoogde SIBO in verband stond met enterocytbeschadiging. 
 
+## reproduceerbaarheid articel 
+
 In het tweede gedeelte wordt het artikel beoordeeld op repoduceerbaarheid waarbij er gekeken wordt naar verschillende beoordelingscriteria. 
+
+## reproduceerbaarheid R code 
+
+
 
 
