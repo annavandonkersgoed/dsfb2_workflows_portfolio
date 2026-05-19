@@ -6,16 +6,13 @@ output: html_document
 In dit gedeelte van het portfolio wordt er gekeken naar reproduceerbaarheid vanuit artikelen die online staan. 
 
 # part 1 
-
-Differences in the subgingival microbiome according to stage of periodontitis: A comparison of two geographic regions. Dit artikel doornemen 
-
-Kies één van de artikelen uit de zoekresultaten voor de volgende onderdelen van de opdracht. Verwerk in je portfolio:
+Artikel: Small Intestine Bacterial Overgrowth is associated with increased Campylobacter and epithelial injury in duodenal biopsies of Bangladeshi children
 
 de referentie naar het artikel (inclusief een link naar de website);
 de onderzoeksvraag van het artikel;
 en een (korte!) samenvatting van de methode en resultaten
 
-Parodontitis is een chronische tandvleesontsteking waarbij kaakbot wordt afgebroken. Deze ziekte bestaat uit verschillende stadia. Het doel van het onderzoek uit het artikel was om Next Generation Sequencing technieken te gebruiken om de subgingivaal microbiooms tussen patiënten met verschillende stadia van de ziekte te bestuderen. Daarnaast werd er gekeken naar over er een verschil in microbioom is tussen geografische populaties.
+Environmental enteric dysfonction (EED) is een asymptomatisch syndroom waarbij de dunne darm ontstoken raakt en niet meer effectief nutriënten kan opnemen, wat kan zorgen voor een negatieve impact op de groei en ontwikkeling van kinderen. Dit syndroom komt veel voor in lagen- en middeninkomtslanden, waarbij slechte hygiëne vaak aanwezig is. Het is gevonden dat een deel van de kinderen met EED small intestine bacterial overgrowth (SIBO) hebben, een dysbiose waarbij er teveel bacteriën in de dunne darm groeien. Het doel van dit onderzoek was om te bepalen of SIBO en EED een verband hadden in kinderen uit Bangladesh met als hypothese dat er een verband is en dat mucosa-adherende bacteriën significant zouden verschillen in SIBO positieve kinderen en SIBO negatieve kinderen. 
 
-Eerst werd 
+De kinderen werden geselecteerd op bepaalde ciriteria en biopsies van de twaalfvingerige darm werden genomen. Deze biopsies werden gelijk onderzocht onder de microscoop en daarna bewaard voor DNA extractie. Voor de histlogische analyses werden de biopsies gefixeerd en werden de weefselcoupes beoordeeld volgens een index gerelateerd met de mate van ontsteking van de dunne darm. SIBO werd getest door glucose-hydrogen-breath testing (GHBT) en de samples werden geanalyseerd door gas chromatografie. De samples werden ingedeeld in SIBO positief of SIBO negatief.  
 
