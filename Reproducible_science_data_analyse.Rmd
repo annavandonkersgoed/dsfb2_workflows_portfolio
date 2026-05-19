@@ -128,6 +128,6 @@ Celegans_dataset_no.na %>% filter(expType ==  "controlPositive") %>% select(comp
 
 **Stappenplan voor vervolgonderzoek** 
 
-Als vervolg experiment zou eeen dosis response analyse uitgevoerd kunnen worden.Hiervoor wordt het gemiddelde van de datapunten gebruikt als weergaven. 
+Als vervolg experiment zou een dosis response analyse uitgevoerd kunnen worden. Deze analyse kan worden uitgevoerd in R, waarbij de drc package gebruikt kan worden. 
 
-Explain the functions of the package here 
+
