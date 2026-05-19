@@ -3,6 +3,9 @@ title: "Data_management_portfolio"
 output: html_document
 ---
 
--Screenshot can inhoud README
--Screenshot van mapstructuur 
+Naast dat de Guerilla Analytics regels werden gebruikt voor het data management van de cursus dsfb1 worden de regels ook gebruikt voor dit portfolio. 
+
+- Foto folder structuur 
+
+- Foto README 
 

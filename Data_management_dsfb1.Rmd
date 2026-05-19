@@ -3,7 +3,27 @@ title: "Data_management_folder_tree"
 output: html_document
 ---
 
-Tijdens de cursus dsfb1 is er een RNA-sequancing analyse uitgevoerd. De data van die analyse wordt in deze opdracht gestructueerd volgens de Guerilla Analytics regels voor data management. 
+Tijdens de cursus dsfb1 is er een RNA-sequancing analyse uitgevoerd. De data van die analyse wordt in deze opdracht gestructueerd volgens de Guerilla Analytics regels voor data management. Dit wordt gedaan door een afbeelding van de mapstructuur te laten zien en een screenshot van het bijbehorende README bestand. 
 
--   Screenshot van mapstructuur 
--   Screenshot van README 
+```{r foldertree,  out.width = "250px", fig.cap="fig x: Folder tree cursus dsfb1", echo = FALSE}
+knitr::include_graphics(
+  here::here(
+    "images", "images_dsfb1",
+    "Foldertree_dsfb1.png"
+  )
+)
+
+```
+
+Bij deze folder zit ook een algemeen README bestand en README bestanden voor de datasets. Hieronder komt een foto van het algemene README bestand. 
+
+```{r readme,  out.width = "500px", fig.cap="Daur2 README", echo = FALSE}
+knitr::include_graphics(
+  here::here(
+    "images", "images_dsfb1", 
+    "README_dsfb1.png"
+  )
+)
+
+```
+
