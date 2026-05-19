@@ -19,8 +19,12 @@ Van de geteste kinderen hadden 12.7% SIBO, en er werd geen significan verschil g
 
 In het tweede gedeelte wordt het artikel beoordeeld op repoduceerbaarheid waarbij er gekeken wordt naar verschillende beoordelingscriteria. 
 
+Over het algemeen is het artikel reproduceerbaar. Het doel is duidelijk weergaven aan het einde van de inleiding, er wordt aangegeven waar de data gevonden kan worden en wat de inhoud is van de data. Er wordt aangegeven waar de studie is uitgevoerd en hoe de first author bereikt kan worden. Ook staat er een etische statement en een funding statement en is de code makkelijk te gebruiken. De algemene indruk is dus erg positief. 
+
 ## reproduceerbaarheid R code 
 
+Om te kijken of de code ook reproduceerbaar is wordt er in het derde gedeelte gekeken naar de R code die in het artikel gebruikt is, of deze leesbaar is en of ik deze code zelf kan reproduceren. 
 
+De data zelf is erg makkelijk te vinden. De link die onder Data availability staat brengt je gelijk naar de data. Op de site staan twee documenten genaamd Code en Data. In het Code document  staan 3 
 
 
