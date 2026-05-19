@@ -8,3 +8,14 @@ In dit gedeelte van het portfolio wordt er gekeken naar reproduceerbaarheid vanu
 # part 1 
 
 Differences in the subgingival microbiome according to stage of periodontitis: A comparison of two geographic regions. Dit artikel doornemen 
+
+Kies één van de artikelen uit de zoekresultaten voor de volgende onderdelen van de opdracht. Verwerk in je portfolio:
+
+de referentie naar het artikel (inclusief een link naar de website);
+de onderzoeksvraag van het artikel;
+en een (korte!) samenvatting van de methode en resultaten
+
+Parodontitis is een chronische tandvleesontsteking waarbij kaakbot wordt afgebroken. Deze ziekte bestaat uit verschillende stadia. Het doel van het onderzoek uit het artikel was om Next Generation Sequencing technieken te gebruiken om de subgingivaal microbiooms tussen patiënten met verschillende stadia van de ziekte te bestuderen. Daarnaast werd er gekeken naar over er een verschil in microbioom is tussen geografische populaties.
+
+Eerst werd 
+
