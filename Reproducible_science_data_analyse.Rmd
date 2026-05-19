@@ -112,14 +112,17 @@ Er zijn verschillende controles aanwezig in het experiment.
 
 -   Vehicle controle: De vehicle controle geeft aan of de substantie waarmee de getetste stoffen zijn opgelost invloed heeft op het experiment.
 
-Uit de bovenstaande grafiek is te zien dat de positieve controle voor het experiment Ethanol is en de negatieve controle S-medium. Dit kan ook gecheckt worden met de volgende code:
+Uit de bovenstaande grafiek is te zien dat de positieve en vehicle controle voor het experiment Ethanol is en de negatieve controle S-medium. Dit kan ook gecheckt worden met de volgende code:
 
 ```{r controle}
 #Check wat de negatieve controle is voor het experiment 
-Celegans_dataset_no.na %>% filter(expType ==  "controlNegative") %>% select(compName) %>% slice(1)
+Celegans_dataset_no.na %>% filter(expType ==  "controlNegative") %>% select(compName, compConcentration) %>% slice(1)
+
+#Check wat de vehicle controle is voor het experiment 
+Celegans_dataset_no.na %>% filter(expType ==  "controlVehicleA") %>% select(compName, compConcentration) %>% slice(1)
 
 #check wat de positieve controle is voor het experiment 
-Celegans_dataset_no.na %>% filter(expType ==  "controlPositive") %>% select(compName) %>% slice(1)
+Celegans_dataset_no.na %>% filter(expType ==  "controlPositive") %>% select(compName, compConcentration) %>% slice(1)
 
 ```
 
