@@ -2,6 +2,7 @@
 title: "Vrije_opdracht"
 output: html_document
 ---
+#Vrije opdracht 
 
 In dit gedeelte van het portfolio laat ik een techniek zien waar ik intersse voor heb. Dit gedeelte bestaat uit drie delen. In het eerste gedeelte vertel ik over de techniek en waarom het van toepassing voor mij is om dit te leren. Daarna staat mijn planning om deze techniek te leren en als laatste is een workflow met voorbeelden hoe ik de techniek geleerd heb 
 

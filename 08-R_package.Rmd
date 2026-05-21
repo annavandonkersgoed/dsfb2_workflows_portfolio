@@ -3,6 +3,8 @@ title: "R package"
 output: html_document
 ---
 
+#R package 
+
 R packages zijn functies die makkelijk opgeroepen en gebruikt kunnen worden. In deze opdracht wordt er zelf een R package gemaakt. In de package zitten 4 fucnties en een dataset. De functies zijn simepele R functies, zoals het veranderen van het datatype van een kolom. 
 
 De package heet portfunctions (portfolio functions) en is te installeren door de volgende code:
