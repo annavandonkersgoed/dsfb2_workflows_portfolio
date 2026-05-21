@@ -1,0 +1,14 @@
+---
+title: "Covid19_data"
+output: html_document
+---
+
+```{r setup_parameter, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(gridExtra)
+```
+
+
+
+In deze opdracht wordt er gewerkt met parameters. De parameters die gebruikt zijn in deze opdracht zijn countries, year en month. Deze bookdown bevat een video waarin te zien is dat er met de parameters is gewerkt. 
