@@ -164,7 +164,9 @@ DimPlot(pbmc.seurat.obj, reduction = "umap")
 
 #Annotate each cluster 
 #Reference based approach 
-library
+
+#Pick a reference that you expect to be in the dataset 
+
 
 
 #Marker based approach 
