@@ -1,0 +1,11 @@
+fig:foldertree
+fig:readme
+cirriculum-vitea
+plan-voor-de-toekomst
+onderbouwing-toekomstplan
+planning
+uitwerking-vrije-opdracht
+artikel-informatie
+reproduceerbaarheid-articel
+reproduceerbaarheid-r-code
+introductie-project-amr
