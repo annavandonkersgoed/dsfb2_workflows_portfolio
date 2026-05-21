@@ -1,13 +1,10 @@
 ---
-title: "Portfolio Data Science For Biology 2"
-author: "Anna van Donkersgoed"
+title: "My Book"
+author: "Your Name"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
 output:
   bookdown::gitbook: default
 ---
-
 # Introduction 
 
 Welcome to my portfolio 
