@@ -26,7 +26,7 @@ De belangrijke variabelen in dit experiment zijn:
 De eerste stap is het inlezen van de data
 
 ```{r, inlezen excel}
-Celegans_dataset <- read_excel(here::here("Data", "data_raw", "Data010", "CE.LIQ.FLOW.062_Tidydata.xlsx"), sheet = 1)
+Celegans_dataset <- read_excel(here::here("raw_data", "Data010", "CE.LIQ.FLOW.062_Tidydata.xlsx"), sheet = 1)
 ```
 
 Na het inlezen van de data wordt de data gecontroleerd op het type.
