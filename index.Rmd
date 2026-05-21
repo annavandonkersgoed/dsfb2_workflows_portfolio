@@ -4,6 +4,7 @@ author: "Anna van Donkersgoed"
 site: bookdown::bookdown_site
 output:
   bookdown::gitbook: default
+bibliography: bibliography.bib
 ---
 # Introduction 
 
