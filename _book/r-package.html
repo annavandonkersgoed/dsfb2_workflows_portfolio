@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Plan voor de toekomst | Portfolio Data Science for Biology 2</title>
-  <meta name="description" content="Chapter 3 Plan voor de toekomst | Portfolio Data Science for Biology 2" />
+  <title>Chapter 9 R package | Portfolio Data Science for Biology 2</title>
+  <meta name="description" content="Chapter 9 R package | Portfolio Data Science for Biology 2" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Plan voor de toekomst | Portfolio Data Science for Biology 2" />
+  <meta property="og:title" content="Chapter 9 R package | Portfolio Data Science for Biology 2" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Plan voor de toekomst | Portfolio Data Science for Biology 2" />
+  <meta name="twitter:title" content="Chapter 9 R package | Portfolio Data Science for Biology 2" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="cirriculum-vitea.html"/>
-<link rel="next" href="vrije-opdracht.html"/>
+<link rel="prev" href="reproducable-science-article.html"/>
+<link rel="next" href="introductie-project-amr.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -174,9 +174,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="plan-voor-de-toekomst" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Plan voor de toekomst<a href="plan-voor-de-toekomst.html#plan-voor-de-toekomst" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Hierin komt mijn plan voor de toekomst te staan, welke technieken ik wil leren enw at ik al kan/nog moet bereiken.</p>
+<div id="r-package" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> R package<a href="r-package.html#r-package" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>R packages zijn functies die makkelijk opgeroepen en gebruikt kunnen worden. In deze opdracht wordt er zelf een R package gemaakt. In de package zitten 4 fucnties en een dataset. De functies zijn simepele R functies, zoals het veranderen van het datatype van een kolom.</p>
+<p>De package heet portfunctions (portfolio functions) en is te installeren door de volgende code:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="r-package.html#cb17-1" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;annavandonkersgoed/portfunctions&quot;</span>)</span></code></pre></div>
+<p>de package heeft meerdere functies met code die in de bestanden van dit portfolio staan. Korte uitleg over de functies (staat ook in de vignette):</p>
+<ul>
+<li><p>Datatype: Veranderd een kolom van een dataset naar het gewenste datatype.</p></li>
+<li><p>RemoveNA: Verwijderd NA waarden uit een kolom en zorgt ervoor dat de rijen met die waarden ook verwijderd worden.</p></li>
+<li><p>NotZero: Zorgt ervoor bij het maken van een grafiek dat de waarden niet door 0 gaan.</p></li>
+<li><p>ChangeColname: Verandert de kolomnaam naar een nieuwe naam.</p></li>
+</ul>
+<p>Dataset in de package: LandBird_Monitoring
+<a href="https://catalog.data.gov/dataset/ncrn-bird-monitoring-data-2007-2017">Link naar dataset</a></p>
+<p><a href="https://github.com/annavandonkersgoed/portfunctions.git">Link naar repository</a></p>
+<p>De vignette kan bekeken worden door de volgende code:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="r-package.html#cb18-1" tabindex="-1"></a><span class="fu">browseVignettes</span>(<span class="st">&quot;portfunctions&quot;</span>)</span></code></pre></div>
 
 </div>
             </section>
@@ -184,8 +198,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="cirriculum-vitea.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="vrije-opdracht.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reproducable-science-article.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introductie-project-amr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

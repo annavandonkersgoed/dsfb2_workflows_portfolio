@@ -1,9 +1,8 @@
 ---
-title: "R package"
 output: html_document
 ---
 
-#R package 
+# R package 
 
 R packages zijn functies die makkelijk opgeroepen en gebruikt kunnen worden. In deze opdracht wordt er zelf een R package gemaakt. In de package zitten 4 fucnties en een dataset. De functies zijn simepele R functies, zoals het veranderen van het datatype van een kolom. 
 

@@ -1,5 +1,4 @@
 ---
-title: "Curriculum_Vitae"
 output: html_document
 ---
 

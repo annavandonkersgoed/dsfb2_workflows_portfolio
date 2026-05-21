@@ -1,7 +1,7 @@
 ---
-title: "Plan_for_future"
 output: html_document
 ---
 
 # Plan voor de toekomst 
 
+Hierin komt mijn plan voor de toekomst te staan, welke technieken ik wil leren enw at ik al kan/nog moet bereiken. 

@@ -1,9 +1,8 @@
 ---
-title: "Data_management_portfolio"
 output: html_document
 ---
 
-#Data management 2 
+# Data management 2 
 
 Naast dat de Guerilla Analytics regels werden gebruikt voor het data management van de cursus dsfb1 worden de regels ook gebruikt voor dit portfolio. 
 

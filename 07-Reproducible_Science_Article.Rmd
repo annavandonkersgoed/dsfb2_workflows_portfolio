@@ -1,9 +1,8 @@
 ---
-title: "Reproducible_Science_Article"
 output: html_document
 ---
 
-#Reproducable science article 
+# Reproducable science article 
 
 In dit gedeelte van het portfolio wordt er gekeken naar reproduceerbaarheid vanuit artikelen die online staan. Eerst wordt het artikel gelezen en wordt er een samenvatting over gemaakt. 
 

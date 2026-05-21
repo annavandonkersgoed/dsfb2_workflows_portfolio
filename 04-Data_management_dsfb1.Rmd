@@ -1,9 +1,8 @@
 ---
-title: "Data_management_folder_tree"
 output: html_document
 ---
 
-#Data management 
+# Data management 
 
 Tijdens de cursus dsfb1 is er een RNA-sequancing analyse uitgevoerd. De data van die analyse wordt in deze opdracht gestructueerd volgens de Guerilla Analytics regels voor data management. Dit wordt gedaan door een afbeelding van de mapstructuur te laten zien en een screenshot van het bijbehorende README bestand. 
 

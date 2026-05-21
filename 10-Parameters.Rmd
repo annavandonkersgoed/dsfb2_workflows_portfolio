@@ -1,9 +1,8 @@
 ---
-title: "Geparametrizeerde_markdown"
 output: html_document
 ---
 
-#Paramized markdown 
+# Paramized markdown 
 
 Laten zien dat er met parameters gewerkt kan worden 
 
