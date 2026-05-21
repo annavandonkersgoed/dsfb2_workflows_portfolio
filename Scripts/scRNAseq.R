@@ -14,7 +14,7 @@ library(dplyr)
 
 #Load in count matrix 
 
-pbmc.n <- Read10X_h5("raw_data/Data020/sc5p_v2_hs_PBMC_10k_raw_feature_bc_matrix.h5")
+pbmc.n <- Read10X_h5(filename = "raw_data/Data020/sc5p_v2_hs_PBMC_10k_raw_feature_bc_matrix.h5")
 #Check count matrix 
 str(pbmc.n)
 #Only choose Gene Expression 
@@ -163,11 +163,11 @@ DimPlot(pbmc.seurat.obj, reduction = "umap")
 
 
 #Annotate each cluster 
-# Option 1, identify signature genes and compate those with literature 
-cluster_markers <- FindAllMarkers(pbmc.seurat.obj, only.pos = TRUE, min.pct = 0.25, logfc.threshold = log(1.2))
-cluster_markers %>% group_by(cluster) %>% top_n(n = 2, wt = avg_log2FC)
+#Reference based approach 
+library
 
 
+#Marker based approach 
 
 
 #Exploratory analysis
