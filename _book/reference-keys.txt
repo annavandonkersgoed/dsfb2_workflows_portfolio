@@ -7,8 +7,8 @@ vrije-opdracht
 onderbouwing-gebasseerd-op-toekomstplan
 planning
 uitwerking-vrije-opdracht
-data-management
-data-management-2
+data-management-deel-1
+data-management-deel-2
 reproducable-science-data-analysis
 reproducable-science-article
 artikel-informatie

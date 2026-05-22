@@ -2,11 +2,6 @@
 output: html_document
 ---
 
-# Data management 2 
+# Data management deel 2 
 
-Naast dat de Guerilla Analytics regels werden gebruikt voor het data management van de cursus dsfb1 worden de regels ook gebruikt voor dit portfolio. 
-
-- Foto folder structuur 
-
-- Foto README 
-
+In dit gedeelte wordt laten zien dat de Guerilla Analytics regels voor datamanagement zijn toegepast op dit portfolio. Hiervoor wordt net zoals bij deel 1 een afbeelding van de folder structuur laten zien en een afbeelding van het README bestand. 

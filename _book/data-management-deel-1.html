@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Reproducable science article | Portfolio Data Science for Biology 2</title>
-  <meta name="description" content="Chapter 8 Reproducable science article | Portfolio Data Science for Biology 2" />
+  <title>Chapter 5 Data management deel 1 | Portfolio Data Science for Biology 2</title>
+  <meta name="description" content="Chapter 5 Data management deel 1 | Portfolio Data Science for Biology 2" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Reproducable science article | Portfolio Data Science for Biology 2" />
+  <meta property="og:title" content="Chapter 5 Data management deel 1 | Portfolio Data Science for Biology 2" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Reproducable science article | Portfolio Data Science for Biology 2" />
+  <meta name="twitter:title" content="Chapter 5 Data management deel 1 | Portfolio Data Science for Biology 2" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="reproducable-science-data-analysis.html"/>
-<link rel="next" href="r-package.html"/>
+<link rel="prev" href="vrije-opdracht.html"/>
+<link rel="next" href="data-management-deel-2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -174,37 +174,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="reproducable-science-article" class="section level1 hasAnchor" number="8">
-<h1><span class="header-section-number">Chapter 8</span> Reproducable science article<a href="reproducable-science-article.html#reproducable-science-article" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In dit gedeelte van het portfolio wordt er gekeken naar reproduceerbaarheid vanuit artikelen die online staan. Eerst wordt het artikel gelezen en wordt er een samenvatting over gemaakt.</p>
-<div id="artikel-informatie" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> Artikel informatie<a href="reproducable-science-article.html#artikel-informatie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Artikel: Small Intestine Bacterial Overgrowth is associated with increased Campylobacter and epithelial injury in duodenal biopsies of Bangladeshi children</p>
-<p>Environmental enteric dysfonction (EED) is een asymptomatisch syndroom waarbij de dunne darm ontstoken raakt en niet meer effectief nutriënten kan opnemen, wat kan zorgen voor een negatieve impact op de groei en ontwikkeling van kinderen. Dit syndroom komt veel voor in lagen- en middeninkomtslanden, waarbij slechte hygiëne vaak aanwezig is. Het is gevonden dat een deel van de kinderen met EED small intestine bacterial overgrowth (SIBO) hebben, een dysbiose waarbij er teveel bacteriën in de dunne darm groeien. Het doel van dit onderzoek was om te bepalen of SIBO en EED een verband hadden in kinderen uit Bangladesh met als hypothese dat er een verband is en dat mucosa-adherende bacteriën significant zouden verschillen in SIBO positieve kinderen en SIBO negatieve kinderen.</p>
-<p>De kinderen werden geselecteerd op bepaalde ciriteria, esophagogastroduodenoscopy werd uitgevoerd en bbiopsies van de twaalfvingerige darm werden genomen. Deze biopsies werden gelijk onderzocht onder de microscoop en daarna bewaard voor DNA extractie, gevolgd door 16srRNA gene sequencing. Voor de histlogische analyses werden de biopsies gefixeerd en werden de weefselcoupes beoordeeld volgens een index gerelateerd met de mate van ontsteking van de dunne darm. SIBO werd getest door glucose-hydrogen-breath testing (GHBT) en de samples werden geanalyseerd door gas chromatografie. De samples werden ingedeeld in SIBO positief of SIBO negatief. Statistische analyses werden uitgevoerd door te kijken naar non-parametische testen, alphaa- en bèta diversiteit.</p>
-<p>Van de geteste kinderen hadden 12.7% SIBO, en er werd geen significan verschil gevonden tussen de histologische elementen tussen SIBO positieve en SIBO negatieve kinderen. Wat opviel was dat kinderen met SIBO een veel hogere abundantie hadden in Campylobacter dan kinderen zonder SIBO en dat verhoogde SIBO in verband stond met enterocytbeschadiging.</p>
+<div id="data-management-deel-1" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Data management deel 1<a href="data-management-deel-1.html#data-management-deel-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Tijdens de cursus Data Science for Biology 1 die bij de minor Data Science hoort is er een RNA-Sequencing analyse uitgevoerd. De data van die analyse is in dit gedeetle gestructueerd volgens de Guerilla Analytics regels voor data management (source). Dit is weergeven in een afbeelding waarin de folder structuur te zien is en een bijbehorend README bestand met informatie over de analyse.</p>
+<p>De afbeelding van de folder directory is gemaakt met de fs package.</p>
+<div class="figure"><span style="display:block;" id="fig:foldertree"></span>
+<img src="Images/images_dsfb1/Foldertree_dsfb1.png" alt="fig x: Folder tree cursus dsfb1" width="250px" />
+<p class="caption">
+Figure 5.1: fig x: Folder tree cursus dsfb1
+</p>
 </div>
-<div id="reproduceerbaarheid-articel" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> reproduceerbaarheid articel<a href="reproducable-science-article.html#reproduceerbaarheid-articel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In het tweede gedeelte wordt het artikel beoordeeld op repoduceerbaarheid waarbij er gekeken wordt naar verschillende beoordelingscriteria.</p>
-<p>Over het algemeen is het artikel reproduceerbaar. Het doel is duidelijk weergeven aan het einde van de inleiding, er wordt aangegeven waar de data gevonden kan worden en dat alle data, metadata en code die gebruikt is in de studie gevonden kan worden. Er wordt aangegeven waar de studie is uitgevoerd en hoe de first author bereikt kan worden. Ook staat er een etische statement en een funding statement en is de code makkelijk te gebruiken. De algemene indruk is dus erg positief.</p>
+<p>In de folder structuur is te zien dat er meerdere README bestanden aanwezig zijn. Er is een algemeen README bestand en README bestanden voor de datasets. In de onderstande foto is het algemene README bestand te zien.</p>
+<div class="figure"><span style="display:block;" id="fig:readme"></span>
+<img src="Images/images_dsfb1/README_dsfb1.png" alt="Daur2 README" width="500px" />
+<p class="caption">
+Figure 5.2: Daur2 README
+</p>
 </div>
-<div id="reproduceerbaarheid-r-code" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> reproduceerbaarheid R code<a href="reproducable-science-article.html#reproduceerbaarheid-r-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Om te kijken of de code ook reproduceerbaar is voer ik de code van het artikel zelf uit om dezelfde resultaten te krijgen als de figuren. De data is te downloaden via een zip bestand. Wat me gelijk opviel was dat er geen README aanwezig was en het ook niet duidelijk was welk script voor welk doel gebruikt was. In de zip folder zat een R script, een Rmarkdown bestand, een R object en 5 datasets. Het R script was wat onduidelijk, maar het Rmarkdown bestand was makkelijk te lezen, aangezien er veel pseudocoding werd gebruikt om de verschillende stappen uit te leggen.</p>
-<p>In het Rmarkdown bestand werden de verschillende analyses uitgevoerd. Nadat de data was ingeladen werden datasets samengevoegd en werden de verschillende taxa gefilterd. Daarna werden alpha en beta diversity analyses uitgevoerd om te kijken naar het verschil in SIBO positieve en SIBO negatieve kinderen. Alpha diversity werd gemeten met de Shannon index en de Wilcoxon test werd uitgevoerd om te kijken of er een singificant verschil is. Daarna werd er gekeken naar de beta diversity door een Principle Coordinates Analysis (PCoA) uit te voeren. Nadat er werd gekeken naar de significantie tussen de verschillende taxa met de de DESeq2 package in R. The area under the curve at 50% was calculated and split into two groups, low and high. Daarna werden verschillende. Daarna werden de histologische resultaten vergeleken met 16srRNA doormiddel van een PERMANOVA test, specifiek voor twee histologische parameters. Hierbij werden de alpha en beta diversity op dezelfde manier als eerder benoemd berekend. Als laatste in de anlayse werd de algemene microbiële compositie onderzocht. Hierbij werden de taxa op phylum level uitgeplot waarbij er naar de abudantie werd gekeken.</p>
-<p>Tijdens het uitvoeren van het markdown bestand kwam ik tegen wat kleine dingen aan. Als eerst zou ik de packages installeren in de code, aangezien dit nu handmatig gedaan moest worden. Daarnaast stonden de datasets in de code in een ander format dan in de folder. Ook kwamen sommige pathways met het inlezen van de data niet overeen met de folderstructuur. Dit zijn dingen die je makkelijk zelf kan aanpassen, wat wel zorgt voor een mindere reproduceerbaarheid. Wat heel fijn was aan dit Rmarkdown bestand was dat als eenmaal alles goed staat de code werkte. De grafieken die uit de bestanden kwamen, waren echter anders dan de grafieken die in het artikel staan, zie figuur x. Daarnaast waren er datasets in de folder, alleen stond er geen duidelijke uitleg bij wat welke dataset inhield.</p>
-<p>Op een schaal van 1 tot 5 geef ik de reproduceerbaarheid van de R code een 3, aangezien niet alles duidelijk is weergeven, maar er wel pseudocoding met uitleg staat. Om op deze manier te kijken naar een artikel besef je zelf hoe lastig het is om goed reproduceerbaar te werken, wat goed inicht geeft.</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="reproducable-science-data-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="r-package.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="vrije-opdracht.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-management-deel-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
