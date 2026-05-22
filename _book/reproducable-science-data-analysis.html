@@ -187,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>De eerste stap is het inlezen van de data</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="reproducable-science-data-analysis.html#cb2-1" tabindex="-1"></a>Celegans_dataset <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;raw_data&quot;</span>, <span class="st">&quot;Data010&quot;</span>, <span class="st">&quot;CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>), <span class="at">sheet =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p>Na het inlezen van de data wordt de data gecontroleerd op het type.</p>
+<p>Na het inlezen van de data wordt de data gecontroleerd op wat voor type het is.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="reproducable-science-data-analysis.html#cb3-1" tabindex="-1"></a><span class="fu">str</span>(Celegans_dataset)</span></code></pre></div>
 <p>Er zijn een paar data type die veranderd moeten worden. De ruwe data is als double maar moet een integer worden aangezien het hele getallen zijn. De concentratie is als character weergeven maar moet als numeric omdat het decimalen heeft. Als laatst moet de naam van de stof worden veranderd naar een factor omdat het categorische data is.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="reproducable-science-data-analysis.html#cb4-1" tabindex="-1"></a><span class="co">#RawData veranderen van dbl naar int </span></span>
@@ -230,7 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-7"><a href="reproducable-science-data-analysis.html#cb9-7" tabindex="-1"></a></span>
 <span id="cb9-8"><a href="reproducable-science-data-analysis.html#cb9-8" tabindex="-1"></a><span class="co">#Zorg ervoor dat de data 1 is door alle waarden door het gemiddelde te delen </span></span>
 <span id="cb9-9"><a href="reproducable-science-data-analysis.html#cb9-9" tabindex="-1"></a>Celegans_dataset_norm<span class="sc">$</span>RawData <span class="ot">&lt;-</span> (Celegans_dataset_norm<span class="sc">$</span>RawData <span class="sc">/</span> mean_control_negative)</span></code></pre></div>
-<p>Daarna wordt er een grafiek gemaakt van de genormaliseerde dat (AI werd gebruikt om te helpen met de berekeningen om de data te normaliseren)</p>
+<p>Daarna wordt er een grafiek gemaakt van de genormaliseerde dat (AI werd gebruikt om te helpen met de berekeningen en de code om de data te analyseren)</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="reproducable-science-data-analysis.html#cb10-1" tabindex="-1"></a>Celegans_dataset_norm<span class="sc">$</span>compConcentration_offset <span class="ot">&lt;-</span> Celegans_dataset_norm<span class="sc">$</span>compConcentration <span class="sc">+</span> <span class="fl">0.001</span></span>
 <span id="cb10-2"><a href="reproducable-science-data-analysis.html#cb10-2" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="reproducable-science-data-analysis.html#cb10-3" tabindex="-1"></a>Celegans_plot_normalized <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Celegans_dataset_norm, <span class="fu">aes</span>(<span class="at">x =</span> compConcentration_offset, <span class="at">y =</span> RawData)) <span class="sc">+</span></span>
@@ -271,7 +271,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   &lt;fct&gt;                &lt;dbl&gt;
 ## 1 Ethanol                1.5</code></pre>
 <p><strong>Stappenplan voor vervolgonderzoek</strong></p>
-<p>Als vervolg experiment zou een dosis response analyse uitgevoerd kunnen worden. Deze analyse kan worden uitgevoerd in R, waarbij de drc package gebruikt kan worden.</p>
+<p>Als vervolg experiment zou een dosis response analyse uitgevoerd kunnen worden. Deze analyse kan worden uitgevoerd in R, waarbij de drc package gebruikt kan worden. Bij de workflow met deze package moet eerst het response type bepaald worden. Nadat het type response is gekozen wordt het gemiddelde berekend en weergeven. Om dit te genereren kunnen ingebouwde dose-response model gebruikt worden, waarbij de vorm van de curve wiskundig berekend wordt. Hierna kan een schatting van de effectieve doses berekend worden en daarna kunnen voorspellingen berekend worden om te kijken naar wat voor response de concentraties die niet gemeten zijn hebben (source). Ook kan er gekeken worden naar de effectieve doses voor 50% van de populatie (Ed50) en de dodelijke doses voor 50% van de populatie (EC50).</p>
 
 </div>
             </section>
