@@ -4,7 +4,7 @@ introduction
 cirriculum-vitea
 plan-voor-de-toekomst
 vrije-opdracht
-onderbouwing-toekomstplan
+onderbouwing-gebasseerd-op-toekomstplan
 planning
 uitwerking-vrije-opdracht
 data-management

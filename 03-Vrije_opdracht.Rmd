@@ -1,18 +1,64 @@
 ---
 output: html_document
 ---
-# Vrije opdracht 
 
-In dit gedeelte van het portfolio laat ik een techniek zien waar ik intersse voor heb. Dit gedeelte bestaat uit drie delen. In het eerste gedeelte vertel ik over de techniek en waarom het van toepassing voor mij is om dit te leren. Daarna staat mijn planning om deze techniek te leren en als laatste is een workflow met voorbeelden hoe ik de techniek geleerd heb 
+# Vrije opdracht
 
-## Onderbouwing toekomstplan 
+In dit gedeelte van het portfolio laat ik een techniek zien waar ik intersse voor heb. Dit gedeelte bestaat uit drie delen. In het eerste gedeelte vertel ik over de techniek en waarom het van toepassing voor mij is om dit te leren. Daarna staat mijn planning om deze techniek te leren en als laatste is een workflow met voorbeelden hoe ik de techniek geleerd heb
 
+## Onderbouwing gebasseerd op toekomstplan
 
+Voor dit onderdeel heb ik gekozen om single cell RNA sequencing data te analyseren. Dit vooral omdat dit te maken gaat hebben met mijn stage. Hierbij wordt er namelijk gekeken naar de interactie tussen bacteriën en humane cellen. Deze techniek kan goed gebruikt worden om te kijken naar de individuele cellen, aangezien niet alle bacteriën in alle cellen gaan zitten. Daarnaast ga ik als techniek ook flow sorting doen van humane cellen, dus past deze analyse er goed in. Ook in de toekomst zou het me interessant lijken om deze techniek verder te gebruiken om te kijken welke cellen er bijvoorbeeld in kankerpatiënten zitten en of cellen bepaalde pathhways gebruiken in de aanwezigheid van bacteriën om bijvoorbeeld chemoresistentie te onderzoeken. Vanuit deze redenen lijkt het me handig om meer inzicht in deze skill te hebben.
+
+Als doel van dit onderdeel wil ik voor mezelf een workflow opstellen zodat ik later dit bestand terug kan halen en makkelijk de stappen voor de analyses kan uitvoeren en begrijpen.
 
 ## Planning
 
+Tijdens deze opdracht wordt er 32 uur besteed om de skill te leren. Op het einde van de opdracht zal ik reflecteren op deze planning en kijken wat er in de toekomst beter kan.
+
+|     Aantal uur    |     Content                                                                                                                                                                                             |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|     Dag 1         |                                                                                                                                                                                                         |
+|     2h            |     Inlezen over   het onderwerp, wat is de standaard workflow                                                                                                                                          |
+|     1h            |     Inlezen over   het onderwerp, wat zijn de methodes die kunnen worden gebruikt en in wat voor   onderzoek wordt deze techniek gebruikt.                                                              |
+|     2h            |     Maken van de   planning, zoek op welke stappen er nodig zijn voor de analyse en plan dit in                                                                                                         |
+|     1h            |     Schrijf   waarom deze techniek relevant is voor de toekomst                                                                                                                                         |
+|     2h            |     Volgen van tutorial   (source), om een indruk te krijgen van de stappen die nodig zijn.                                                                                                             |
+|     Dag 2         |                                                                                                                                                                                                         |
+|     2h            |     Eindig de   tutorial, van dag 1                                                                                                                                                                     |
+|     4h            |     Volg nieuwe   tutorial (source). Voer delen uit van de algemene analyse uit met een nieuwe   dataset.                                                                                               |
+|     2h            |     Voeg delen   van beide tutorial samen om een workflow op te stellen                                                                                                                                 |
+|      Dag 3        |                                                                                                                                                                                                         |
+|     2h            |     Cellen   annoteren, gebruik verschillende methodes en kijk welke methode het beste   werkt.                                                                                                         |
+|     6h            |     Voer   exploratory analyses uit. Hieronder vallen de functional enrichment analysis,   pseudo time analysis en cell-cell communicatie analyses. De gekozen analyses   hangen af van de dataset.     |
+|     Dag 4         |                                                                                                                                                                                                         |
+|     2h            |     Maak workflow   document in Rmarkdown.                                                                                                                                                              |
+|     4h            |     Voer de   analyses uit met een nieuwe dataset.                                                                                                                                                      |
+|     2h            |     Zorg ervoor   dat de figuren duidelijk zijn.                                                                                                                                                        |
+|     2h            |     Schrijf over welke   stappen er in de toekomst nog nodig zijn om expert te worden in dit onderwerp.                                                                                                 |
+De tabel is gemaakt met de table generator (source) 
+
+
+## Uitwerking vrije opdracht
+
+Hier staat een workflow om single cell RNA sequencing data uit te werken. 
+
+```{r}
+#Load libraries 
+#library(tidyverse)
+#library(Seurat)
+#library(patchwork)
+#library(hdf5r)
+#library(dplyr)
+#library(celldex)
+#library(SingleR)
+#library(viridis)
+#library(pheatmap)
+```
+
+De eerste stap was om een tutorial te volgen. Dit werd gedaan door dit artikel (source). De data hiervan is niet weergeven. Daarna werd er een tutorial gevolgd (source) waarbij de dataset werd gebruikt van een 27 jarige gezonde man met als sample human peripheral blood mononuclear cells (PBMCs). Dit is een andere dataset dan degene die in de tutorial wordt gebruikt. 
 
 
 
-## Uitwerking vrije opdracht 
-Deze opdracht bestaat uit een tutorial van een workflow van Single cell Sequencing data. Dit ook omdat ik het later weer terug kan vinden als ik het ga gebruiken. 
+
+
