@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Reproducable science data analysis | Portfolio Data Science for Biology 2</title>
-  <meta name="description" content="Chapter 7 Reproducable science data analysis | Portfolio Data Science for Biology 2" />
+  <title>Opdracht7 Reproducable science data analysis | Portfolio Data Science for Biology 2</title>
+  <meta name="description" content="Opdracht7 Reproducable science data analysis | Portfolio Data Science for Biology 2" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Reproducable science data analysis | Portfolio Data Science for Biology 2" />
+  <meta property="og:title" content="Opdracht7 Reproducable science data analysis | Portfolio Data Science for Biology 2" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Reproducable science data analysis | Portfolio Data Science for Biology 2" />
+  <meta name="twitter:title" content="Opdracht7 Reproducable science data analysis | Portfolio Data Science for Biology 2" />
   
   
   
@@ -197,7 +197,7 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="reproducable-science-data-analysis" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Reproducable science data analysis<a href="reproducable-science-data-analysis.html#reproducable-science-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Opdracht7</span> Reproducable science data analysis<a href="reproducable-science-data-analysis.html#reproducable-science-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Voor wetenschap is het belangrijk dat experimenten reproduceerbaar zijn. Hieronder valt ook de data analyse. In dit gedeeldte van het portfolio wordt data van een uitgevoerd experiment geanalyseerd om te laten zien dat er reproduceerbaar gewerkt kan worden.</p>
 <p>Het doel van het experiment was om te kijken welke stoffen invloed hebben op de nakomelingen van <em>C. elegans</em> Dit werd gedaan door de nematoden bloot te stellen aan verschillende concentraties van verschillende stoffen. Het aantal nakomelingen is geteld. De data uit dit experiment wordt geanalyseerd.</p>
 <p>Het experiment is uitgevoerd door J. Louter (INT/ILC) en de data is afkomstig van het HU lectoraat Innovative Testing in Life Sciences &amp; Chemistry.</p>
@@ -238,9 +238,10 @@ div.csl-indent {
 <span id="cb6-12"><a href="reproducable-science-data-analysis.html#cb6-12" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
 <span id="cb6-13"><a href="reproducable-science-data-analysis.html#cb6-13" tabindex="-1"></a></span>
 <span id="cb6-14"><a href="reproducable-science-data-analysis.html#cb6-14" tabindex="-1"></a>Celegans_plot</span></code></pre></div>
-<pre><code>## Warning: Removed 1 row containing missing values or values
-## outside the scale range (`geom_point()`).</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-1-1.png" alt="" width="672" /></p>
+<pre><code>## Warning: Removed 1 row containing missing values
+## or values outside the scale range
+## (`geom_point()`).</code></pre>
+<p><img src="portfolio-DSFB2_files/figure-html/unnamed-chunk-1-1.png" alt="" width="672" /></p>
 <p>Normalisatie: Als laatste stap wordt de data genormaliseerd op een manier waardoor de negatieve controle gelijk is aan 1 en de rest wordt uitgedrukt als een fractie daarvan. Dit wordt gedaan zodat de data makkelijker kan worden vergeleken met de negatieve controle om een verschil te zien in de grafiek.</p>
 <p>Eerst wordt de data veranderd zodat de negatieve controle gelijk is aan 1 en de ander data een fractie daarvan.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="reproducable-science-data-analysis.html#cb8-1" tabindex="-1"></a><span class="co">#Berekenen van het gemiddelde van de negatieve controle </span></span>
@@ -264,9 +265,10 @@ div.csl-indent {
 <span id="cb9-9"><a href="reproducable-science-data-analysis.html#cb9-9" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Concentratie (nM) &quot;</span>) <span class="sc">+</span></span>
 <span id="cb9-10"><a href="reproducable-science-data-analysis.html#cb9-10" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
 <span id="cb9-11"><a href="reproducable-science-data-analysis.html#cb9-11" tabindex="-1"></a>Celegans_plot_normalized</span></code></pre></div>
-<pre><code>## Warning: Removed 1 row containing missing values or values
-## outside the scale range (`geom_point()`).</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" /></p>
+<pre><code>## Warning: Removed 1 row containing missing values
+## or values outside the scale range
+## (`geom_point()`).</code></pre>
+<p><img src="portfolio-DSFB2_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" /></p>
 <p>Er zijn verschillende controles aanwezig in het experiment.</p>
 <ul>
 <li><p>Positieve controle: De positieve controle is de conditie waarbij er een positief resultaat wordt verwacht. In dit geval zal de controle wel een effect hebben op het aantal nakomelingen van de <em>C.elegans</em></p></li>

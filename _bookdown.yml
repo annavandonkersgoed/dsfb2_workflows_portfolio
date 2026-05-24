@@ -1,6 +1,6 @@
-book_filename: "bookdown-demo"
-language:
+book_filename: "portfolio DSFB2"
+language: 
   ui:
-    chapter_name: "Chapter "
+    chapter_name: "Opdracht"
 delete_merged_file: true
 
