@@ -6,6 +6,12 @@ library(Seurat)
 library(patchwork)
 library(hdf5r)
 library(dplyr)
+library(DoubletFinder)
+library(ggplot2)
+library(celldex)
+library(SingleR)
+library(viridis)
+library(pheatmap)
 
 #Data analysis 
 #Separate script
@@ -61,10 +67,6 @@ pbmc.seurat.filtered <- subset(pbmc.seurat.obj, subset = nFeature_RNA > 200 & nF
 pbmc.seurat.filtered
 #20233 features across 7574 samples 
 
-#Can filter out for doublets -> see if data gets better 
-#Package: DoubletFinder (2 cells being sequenced together as 1 cell)
-
-
 #3. normalize data
 #Divide gene measurement in each cell by the total expression multiplied by a scaling factor, log trasnsform 
 pbmc.seurat.filtered <- NormalizeData(pbmc.seurat.obj)
@@ -82,15 +84,9 @@ pbmc.seurat.filtered <- FindVariableFeatures(pbmc.seurat.filtered, selection.met
 #Check top 1 highly variable genes
 top10_HVG <- head(VariableFeatures(pbmc.seurat.filtered), 10)
 
-#Plot features 
+#Plot variable features 
 plot1 <- VariableFeaturePlot(pbmc.seurat.filtered)
 LabelPoints(plot = plot1, points = top10_HVG, repel = TRUE)
-
-#Plot variable features 
-top_features <- head(VariableFeatures(pbmc.seurat.filtered), 20)
-plot1 <- VariableFeaturePlot(pbmc.seurat.filtered)
-plot2 <- LabelPoints(plot = plot1, points = top_features, repel = TRUE)
-plot1 + plot2
 
 #5. Data scaling 
 #Acount for sources of variance 
@@ -133,7 +129,7 @@ ElbowPlot(pbmc.seurat.filtered, ndims = ncol(Embeddings(pbmc.seurat.filtered, "p
 pbmc.seurat.filtered <- FindNeighbors(pbmc.seurat.filtered, dims = 1:15)
 View(pbmc.seurat.filtered@meta.data)
 
-#Resolutio
+#Resolution
 #Defines the resolution of the clusters. The higher the number, there are more clusters
 #See which resolution works best to distinct the cells into different clusters 
 pbmc.seurat.filtered <- FindClusters(pbmc.seurat.filtered, resolution = c(0.1, 0.3, 0.5, 0.7, 1))
@@ -163,13 +159,61 @@ plot1 + plot2
 #Only UMAP 
 DimPlot(pbmc.seurat.filtered, reduction = "umap")
 
+#DoubletFinder
+#Filter out doublets in dataset 
+
+#Test different Pk values 
+
+sweep.res.list_pbmc <- paramSweep(pbmc.seurat.filtered, PCs = 1:15, sct = FALSE)
+sweep.stats_pbmc <- summarizeSweep(sweep.res.list_pbmc, GT= FALSE)
+#Find optimal pK value 
+bcmvn_pbmc <- find.pK(sweep.stats_pbmc)
+
+
+#Plot Pk against BCmetric 
+ggplot(bcmvn_pbmc, aes(pK, BCmetric, group = 1)) +
+  geom_point()+
+  geom_line()
+
+#Store optimal pK value to pK variable 
+pK <- bcmvn_pbmc %>% 
+  filter(BCmetric == max(BCmetric)) %>%
+  select(pK)
+pK <- as.numeric(as.character(pK[[1]]))
+
+#Calculate expexted numver of doublets 
+#See for each cell what cluster they belong to 
+annotations <- pbmc.seurat.filtered@meta.data$seurat_clusters
+
+#Model proportions homotypic doublets 
+homotypic.prop <- modelHomotypic(annotations)
+#Proportion homotypic doublets 
+homotypic.prop 
+
+#Estimate number of doublets expected 
+multiplet_rates_10x <- data.frame('Multiplet_rate'= c(0.004, 0.008, 0.0160, 0.023, 0.031, 0.039, 0.046, 0.054, 0.061, 0.069, 0.076),
+                                  'Loaded_cells' = c(800, 1600, 3200, 4800, 6400, 8000, 9600, 11200, 12800, 14400, 16000),
+                                  'Recovered_cells' = c(500, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000))
+
+multiplet_rate <- multiplet_rates_10x %>% dplyr::filter(Recovered_cells < nrow(pbmc.seurat.filtered@meta.data)) %>% 
+  dplyr::slice(which.max(Recovered_cells)) %>% # select the min threshold depending on your number of samples
+  dplyr::select(Multiplet_rate) %>% as.numeric(as.character()) # get the expected multiplet rate for that number of recovered cells
+#Expected number of doublets 
+nExp.poi <- round(multiplet_rate * nrow(pbmc.seurat.filtered@meta.data))
+#Expected number of doublets after adjustment of homotypic doublets 
+nExp.poi_adj <- round(nExp.poi*(1-homotypic.prop))
+
+#Run DoubletFinder 
+pbmc.seurat.filtered <- doubletFinder(pbmc.seurat.filtered, 
+                                      PCs = 1:15,
+                                      pN = 0.25, 
+                                      pK = pK, 
+                                      nExp = nExp.poi_adj, 
+                                      reuse.pANN = FALSE, sct = FALSE)
 
 #9. Annotate each cluster 
 #One reference based approach
-library(celldex)
-library(SingleR)
-library(viridis)
-library(pheatmap)
+
 
 #Pick a reference that you expect to be in the dataset 
 ref <- celldex::HumanPrimaryCellAtlasData()
