@@ -3,7 +3,7 @@ output: html_document
 ---
 # Paramized markdown 
 
-In dit gedeelte van het portfolio wordt laten zien dat er gewerkt kan worden met parameters in een Rmarkdown bestand. Er is een video gemaakt waarin te zien is dat de parameters veranderd kunnen worden en een andere output geven. Voor deze analyse is een dataset gebruikt waarin het dagelijkse aantal COVID-19 besmettingen en doden per land zijn bijgehouden (@DataDailyNumber2022). De dataset is sinds 1 november 2022 niet meer doorgezet.
+In dit gedeelte van het portfolio wordt laten zien dat er gewerkt kan worden met parameters in een Rmarkdown bestand. Er is een video gemaakt waarin te zien is dat de parameters veranderd kunnen worden en een andere output geven. Voor deze analyse is een dataset gebruikt waarin het dagelijkse aantal COVID-19 besmettingen en doden per land zijn bijgehouden [@DataDailyNumber2022]. De dataset is sinds 1 november 2022 niet meer doorgezet.
 
 Het script van de video is ook te zien in de repository van dit portfolio onder de naam: 
 

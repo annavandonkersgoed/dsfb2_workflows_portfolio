@@ -9,7 +9,7 @@ Tijdens de cursus Data Science for Biology 1 die bij de minor Data Science hoort
 
 De afbeelding van de folder directory is gemaakt met de fs package. 
 
-```{r foldertree,  out.width = "250px", fig.cap="fig x: Folder tree cursus dsfb1", echo = FALSE}
+```{r foldertree,  out.width = "250px", fig.cap="Folder tree cursus dsfb1", echo = FALSE}
 knitr::include_graphics(
   here::here(
     "images", "images_dsfb1",
