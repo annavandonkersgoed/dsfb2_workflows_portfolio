@@ -41,24 +41,7 @@ De tabel is gemaakt met de table generator (source)
 
 ## Uitwerking vrije opdracht
 
-Hier staat een workflow om single cell RNA sequencing data uit te werken. 
+Tijdens het uitwerken van de vrije opdracht is er een script met de verschillende stappen. Dit script is gebruikt op twee datasets. De eerste dataset die is uitgewerkt zijn human peripheral blood mononuclear cells (PBMCs) van een gezonde 27 jarige mannelijke donor (@HumanPBMCHealthy). De analyses zijn eerst op deze dataset uitgewerkt. Daarna is de dataset van een 
 
-```{r}
-#Load libraries 
-#library(tidyverse)
-#library(Seurat)
-#library(patchwork)
-#library(hdf5r)
-#library(dplyr)
-#library(celldex)
-#library(SingleR)
-#library(viridis)
-#library(pheatmap)
-```
-
-De eerste stap was om een tutorial te volgen. Dit werd gedaan door dit artikel (source). De data hiervan is niet weergeven. Daarna werd er een tutorial gevolgd (source) waarbij de dataset werd gebruikt van een 27 jarige gezonde man met als sample human peripheral blood mononuclear cells (PBMCs). Dit is een andere dataset dan degene die in de tutorial wordt gebruikt. 
-
-
-
-
+In dit gedeelte staat een rapport van de stappen die uitgevoerd zijn en de figuren die gemaakt zijn. De specifieke code kan in het script in de repository gevonden worden. 
 
