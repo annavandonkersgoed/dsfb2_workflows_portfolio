@@ -1,6 +1,6 @@
 book_filename: "portfolio DSFB2"
 language: 
   ui:
-    chapter_name: "Opdracht"
+    chapter_name: "Chapter "
 delete_merged_file: true
 
