@@ -8,7 +8,7 @@ In dit gedeelte wordt laten zien dat de Guerilla Analytics regels voor datamanag
 
 De afbeelding van de folder directory is gemaakt met de fs package. 
 
-```{r foldertree_portfolio, out.width = "250px", fig.cap="Folder tree portfolio", echo = FALSE}
+```{r folder tree portfolio,  out.width = "500px", fig.cap="Portfolio folder tree", echo = FALSE}
 knitr::include_graphics(
   here::here(
     "images", "images_020",
@@ -20,10 +20,11 @@ knitr::include_graphics(
 
 In de folder structuur is te zien dat er meerdere README bestanden aanwezig zijn. Er is een algemeen README bestand en README bestanden voor de datasets. In de onderstande foto is het algemene README bestand te zien. 
 
-```{r readme_portfolio, out.width = "500px", fig.cap="Portfolio README", echo = FALSE}
+
+```{r readme portfolio,  out.width = "500px", fig.cap="README folder tree", echo = FALSE}
 knitr::include_graphics(
   here::here(
-    "images", "images_020", 
+    "images", "images_020",
     "README_portfolio.png"
   )
 )
