@@ -41,7 +41,29 @@ De tabel is gemaakt met de table generator (source)
 
 ## Uitwerking vrije opdracht
 
-Tijdens het uitwerken van de vrije opdracht is er een script met de verschillende stappen. Dit script is gebruikt op twee datasets. De eerste dataset die is uitgewerkt zijn human peripheral blood mononuclear cells (PBMCs) van een gezonde 27 jarige mannelijke donor (@HumanPBMCHealthy). De analyses zijn eerst op deze dataset uitgewerkt. Daarna is de dataset van een 
+Tijdens het uitwerken van de vrije opdracht heb ik eerst een tutorial gevolgd om de code beter te begrijpen [link naar tutorial](https://github.com/quadbio/scRNAseq_analysis_vignette). Nadat deze tutorial is gevolgd heb ik online tutorials gezien en een combinatie van de code gebruikt om een script te maken die ik later ook kan gebruiken voor analyses. 
 
-In dit gedeelte staat een rapport van de stappen die uitgevoerd zijn en de figuren die gemaakt zijn. De specifieke code kan in het script in de repository gevonden worden. 
+Voor single cell RNA sequencing data analyses zijn er drie stappen. De eerste stap is om de ruwe data in te laden, te filteren met het programma FASTQC en een countmatrix te maken. Deze stappen zijn in dit gedeetle niet gedaan, aangezien er als dataset een count matrix is ingeladen vanuit de site 10x Genomics. Eerst zijn de analyste stappen uitgevoerd op een dataset met human peripheral blood mononuclear cells (PBMCs) van een gezonde 27 jarige man. Vanuit deze data heb ik de bijbehorende countmatrix gedownload en hier op analyses uitgevoerd. Om het volledige script te zien, ga naar de pathway: scripts/scRNAseq.R. In dit portfolio staan de algemene stappen en de grafieken die erbij worden gemaakt. 
+
+### General analysis 
+Nadat de count matrix is gemaakt worden algemene analyses uitgevoerd. De data wordt gefiltered op slechte kwaliteit cellen (als de cellen hele lage of hele hoge transcriptie hebben) en op mitochondriale transcriptie (MT). Dit wordt gedaan omdat slechte kwaliteit cellen vaak schade hebben waardoor er veel MT vrij komt. 
+
+```{r, load_libraries, echo = TRUE, message = FALSE}
+#load in libraries 
+library(tidyverse)
+library(Seurat)
+library(patchwork)
+library(hdf5r)
+library(dplyr)
+library(DoubletFinder)
+library(ggplot2)
+library(celldex)
+library(SingleR)
+library(viridis)
+library(pheatmap)
+```
+
+
+
+
 
