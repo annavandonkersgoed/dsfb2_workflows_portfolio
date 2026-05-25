@@ -35,7 +35,7 @@ Tijdens het uitvoeren van het markdown bestand kwam ik tegen wat kleine dingen a
 ```{r article,  out.width = "500px", fig.cap="Figure in article", echo = FALSE}
 knitr::include_graphics(
   here::here(
-    "images", "images_article",
+    "images", "images_010",
     "Figure_in_article.jpg"
   )
 )
@@ -45,7 +45,7 @@ knitr::include_graphics(
 ```{r code,  out.width = "500px", fig.cap="Figure made by code", echo = FALSE}
 knitr::include_graphics(
   here::here(
-    "images", "images_article",
+    "images", "images_010",
     "Figure_after_R_code_article.png"
   )
 )

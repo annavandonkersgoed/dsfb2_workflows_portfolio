@@ -12,7 +12,7 @@ De afbeelding van de folder directory is gemaakt met de fs package.
 ```{r foldertree,  out.width = "250px", fig.cap="Folder tree cursus dsfb1", echo = FALSE}
 knitr::include_graphics(
   here::here(
-    "images", "images_dsfb1",
+    "images", "images_020",
     "Foldertree_dsfb1.png"
   )
 )
@@ -24,7 +24,7 @@ In de folder structuur is te zien dat er meerdere README bestanden aanwezig zijn
 ```{r readme,  out.width = "500px", fig.cap="Daur2 README", echo = FALSE}
 knitr::include_graphics(
   here::here(
-    "images", "images_dsfb1", 
+    "images", "images_020", 
     "README_dsfb1.png"
   )
 )
