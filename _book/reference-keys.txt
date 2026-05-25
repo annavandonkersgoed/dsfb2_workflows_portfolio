@@ -1,7 +1,3 @@
-fig:foldertree
-fig:readme
-fig:article
-fig:code
 introduction
 cirriculum-vitea
 plan-voor-de-toekomst
@@ -9,6 +5,7 @@ vrije-opdracht
 onderbouwing-gebasseerd-op-toekomstplan
 planning
 uitwerking-vrije-opdracht
+general-analysis
 data-management-deel-1
 data-management-deel-2
 reproducable-science-data-analysis

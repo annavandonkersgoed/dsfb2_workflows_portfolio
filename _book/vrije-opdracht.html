@@ -165,7 +165,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.1" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#onderbouwing-gebasseerd-op-toekomstplan"><i class="fa fa-check"></i><b>4.1</b> Onderbouwing gebasseerd op toekomstplan</a></li>
 <li class="chapter" data-level="4.2" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#planning"><i class="fa fa-check"></i><b>4.2</b> Planning</a></li>
-<li class="chapter" data-level="4.3" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#uitwerking-vrije-opdracht"><i class="fa fa-check"></i><b>4.3</b> Uitwerking vrije opdracht</a></li>
+<li class="chapter" data-level="4.3" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#uitwerking-vrije-opdracht"><i class="fa fa-check"></i><b>4.3</b> Uitwerking vrije opdracht</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#general-analysis"><i class="fa fa-check"></i><b>4.3.1</b> General analysis</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="data-management-deel-1.html"><a href="data-management-deel-1.html"><i class="fa fa-check"></i><b>5</b> Data management deel 1</a></li>
 <li class="chapter" data-level="6" data-path="data-management-deel-2.html"><a href="data-management-deel-2.html"><i class="fa fa-check"></i><b>6</b> Data management deel 2</a></li>
@@ -210,8 +213,8 @@ div.csl-indent {
 <p>Tijdens deze opdracht wordt er 32 uur besteed om de skill te leren. Op het einde van de opdracht zal ik reflecteren op deze planning en kijken wat er in de toekomst beter kan.</p>
 <table>
 <colgroup>
-<col width="8%" />
-<col width="91%" />
+<col width="22%" />
+<col width="77%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -294,13 +297,154 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>De tabel is gemaakt met de table generator (source)</p>
 </div>
 <div id="uitwerking-vrije-opdracht" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Uitwerking vrije opdracht<a href="vrije-opdracht.html#uitwerking-vrije-opdracht" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Tijdens het uitwerken van de vrije opdracht is er een script met de verschillende stappen. Dit script is gebruikt op twee datasets. De eerste dataset die is uitgewerkt zijn human peripheral blood mononuclear cells (PBMCs) van een gezonde 27 jarige mannelijke donor (<span class="citation">(<a href="#ref-HumanPBMCHealthy"><strong>HumanPBMCHealthy?</strong></a>)</span>). De analyses zijn eerst op deze dataset uitgewerkt. Daarna is de dataset van een</p>
-<p>In dit gedeelte staat een rapport van de stappen die uitgevoerd zijn en de figuren die gemaakt zijn. De specifieke code kan in het script in de repository gevonden worden.</p>
+<p>Tijdens het uitwerken van de vrije opdracht heb ik eerst een tutorial gevolgd om de code beter te begrijpen <a href="https://github.com/quadbio/scRNAseq_analysis_vignette">link naar tutorial</a>. Nadat deze tutorial is gevolgd heb ik online tutorials gezien en een combinatie van de code gebruikt om een script te maken die ik later ook kan gebruiken voor analyses.</p>
+<p>Voor single cell RNA sequencing data analyses zijn er drie stappen. De eerste stap is om de ruwe data in te laden, te filteren met het programma FASTQC en een countmatrix te maken. Deze stappen zijn in dit gedeetle niet gedaan, aangezien er als dataset een count matrix is ingeladen vanuit de site 10x Genomics. Eerst zijn de analyste stappen uitgevoerd op een dataset met human peripheral blood mononuclear cells (PBMCs) van een gezonde 27 jarige man. Vanuit deze data heb ik de bijbehorende countmatrix gedownload en hier op analyses uitgevoerd. Om het volledige script te zien, ga naar de pathway: scripts/scRNAseq.R. In dit portfolio staan de algemene stappen en de grafieken die erbij worden gemaakt.</p>
+<div id="general-analysis" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> General analysis<a href="vrije-opdracht.html#general-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Nadat de count matrix is gemaakt worden algemene analyses uitgevoerd. De data wordt gefiltered op slechte kwaliteit cellen (als de cellen hele lage of hele hoge transcriptie hebben) en op mitochondriale transcriptie (MT). Dit wordt gedaan omdat slechte kwaliteit cellen vaak schade hebben waardoor er veel MT vrij komt.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="vrije-opdracht.html#cb1-1" tabindex="-1"></a><span class="co">#Load libraries</span></span>
+<span id="cb1-2"><a href="vrije-opdracht.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="vrije-opdracht.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
+<span id="cb1-4"><a href="vrije-opdracht.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-5"><a href="vrije-opdracht.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(hdf5r)</span>
+<span id="cb1-6"><a href="vrije-opdracht.html#cb1-6" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-7"><a href="vrije-opdracht.html#cb1-7" tabindex="-1"></a><span class="fu">library</span>(DoubletFinder)</span>
+<span id="cb1-8"><a href="vrije-opdracht.html#cb1-8" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-9"><a href="vrije-opdracht.html#cb1-9" tabindex="-1"></a><span class="fu">library</span>(celldex)</span>
+<span id="cb1-10"><a href="vrije-opdracht.html#cb1-10" tabindex="-1"></a><span class="fu">library</span>(SingleR)</span>
+<span id="cb1-11"><a href="vrije-opdracht.html#cb1-11" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb1-12"><a href="vrije-opdracht.html#cb1-12" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="vrije-opdracht.html#cb2-1" tabindex="-1"></a><span class="co">#Load in count matrix </span></span>
+<span id="cb2-2"><a href="vrije-opdracht.html#cb2-2" tabindex="-1"></a>pbmc.n <span class="ot">&lt;-</span> <span class="fu">Read10X_h5</span>(<span class="at">filename =</span> <span class="st">&quot;raw_data/Data020/sc5p_v2_hs_PBMC_10k_raw_feature_bc_matrix.h5&quot;</span>)</span></code></pre></div>
+<pre><code>## Genome matrix has multiple modalities, returning a list of matrices for this genome</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="vrije-opdracht.html#cb4-1" tabindex="-1"></a><span class="co">#Check count matrix </span></span>
+<span id="cb4-2"><a href="vrije-opdracht.html#cb4-2" tabindex="-1"></a><span class="fu">str</span>(pbmc.n)</span></code></pre></div>
+<pre><code>## List of 2
+##  $ Gene Expression :Formal class &#39;dgCMatrix&#39; [package &quot;Matrix&quot;] with 6 slots
+##   .. ..@ i       : int [1:21790216] 36386 31111 8220 31199 23735 32047 13246 26119 724 2093 ...
+##   .. ..@ p       : int [1:737281] 0 1 1 2 4 4 4 4 4 4 ...
+##   .. ..@ Dim     : int [1:2] 36601 737280
+##   .. ..@ Dimnames:List of 2
+##   .. .. ..$ : chr [1:36601] &quot;MIR1302-2HG&quot; &quot;FAM138A&quot; &quot;OR4F5&quot; &quot;AL627309.1&quot; ...
+##   .. .. ..$ : chr [1:737280] &quot;AAACCTGAGAAACCAT-1&quot; &quot;AAACCTGAGAAACCGC-1&quot; &quot;AAACCTGAGAAACCTA-1&quot; &quot;AAACCTGAGAAACGAG-1&quot; ...
+##   .. ..@ x       : num [1:21790216] 1 1 1 1 1 2 1 1 1 1 ...
+##   .. ..@ factors : list()
+##  $ Antibody Capture:Formal class &#39;dgCMatrix&#39; [package &quot;Matrix&quot;] with 6 slots
+##   .. ..@ i       : int [1:3020346] 3 13 4 10 13 0 2 3 4 8 ...
+##   .. ..@ p       : int [1:737281] 0 0 2 3 3 5 7 7 10 12 ...
+##   .. ..@ Dim     : int [1:2] 19 737280
+##   .. ..@ Dimnames:List of 2
+##   .. .. ..$ : chr [1:19] &quot;CD3_TotalC&quot; &quot;CD19_TotalC&quot; &quot;CD45RA_TotalC&quot; &quot;CD4_TotalC&quot; ...
+##   .. .. ..$ : chr [1:737280] &quot;AAACCTGAGAAACCAT-1&quot; &quot;AAACCTGAGAAACCGC-1&quot; &quot;AAACCTGAGAAACCTA-1&quot; &quot;AAACCTGAGAAACGAG-1&quot; ...
+##   .. ..@ x       : num [1:3020346] 1 1 1 1 1 1 1 1 1 1 ...
+##   .. ..@ factors : list()</code></pre>
+<p>Zoals te zien zijn er twee verschillende countmatrixen aanwezig in de data. Voor deze analyse werken we verder met de matrix genaamd Gene Expression.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="vrije-opdracht.html#cb6-1" tabindex="-1"></a>pbmc_counts <span class="ot">&lt;-</span> pbmc.n<span class="sc">$</span><span class="st">`</span><span class="at">Gene Expression</span><span class="st">`</span></span></code></pre></div>
+<p>De data wordt ingeladen als een Seurat object.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="vrije-opdracht.html#cb7-1" tabindex="-1"></a><span class="co">#Load data and filter out low quality cells and genes </span></span>
+<span id="cb7-2"><a href="vrije-opdracht.html#cb7-2" tabindex="-1"></a>pbmc.seurat.obj <span class="ot">&lt;-</span> <span class="fu">CreateSeuratObject</span>(pbmc_counts, <span class="at">project=</span><span class="st">&quot;PBMC&quot;</span>, <span class="at">min.cells =</span> <span class="dv">3</span>, <span class="at">min.features =</span> <span class="dv">200</span>)</span>
+<span id="cb7-3"><a href="vrije-opdracht.html#cb7-3" tabindex="-1"></a>pbmc.seurat.obj</span>
+<span id="cb7-4"><a href="vrije-opdracht.html#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="vrije-opdracht.html#cb7-5" tabindex="-1"></a><span class="co">#Check object </span></span>
+<span id="cb7-6"><a href="vrije-opdracht.html#cb7-6" tabindex="-1"></a><span class="fu">str</span>(pbmc.seurat.obj)</span></code></pre></div>
+<p>Na het inladen van de data kan de data worden gefiltert. Eerst wordt er gekeken naar de verdeling van de data. Dit wordt gedaan met een violin plot.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="vrije-opdracht.html#cb8-1" tabindex="-1"></a><span class="co">#Check mitochondrial transcript (MT) percentage. dying/low quality cells have hgher MT concentrations </span></span>
+<span id="cb8-2"><a href="vrije-opdracht.html#cb8-2" tabindex="-1"></a>pbmc.seurat.obj[[<span class="st">&quot;percent.mt&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">PercentageFeatureSet</span>(pbmc.seurat.obj, <span class="at">pattern =</span> <span class="st">&quot;^MT[-</span><span class="sc">\\</span><span class="st">.]&quot;</span>)</span>
+<span id="cb8-3"><a href="vrije-opdracht.html#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="vrije-opdracht.html#cb8-4" tabindex="-1"></a><span class="co">#Look at distribution data </span></span>
+<span id="cb8-5"><a href="vrije-opdracht.html#cb8-5" tabindex="-1"></a><span class="fu">VlnPlot</span>(pbmc.seurat.obj, <span class="at">features =</span> <span class="fu">c</span>(<span class="st">&quot;nFeature_RNA&quot;</span>, <span class="st">&quot;nCount_RNA&quot;</span>, <span class="st">&quot;percent.mt&quot;</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="portfolio_DSFB2_files/figure-html/filter_seurat-1.png" alt="" width="672" /></p>
+<p>Daarnaast wordt er gekeken naar verschillende correlaties. Er wordt verwacht dat er een correlatie is tussen het aantal genen en het aantal transcripties, maar dat er geen correlatie is tussen het aantal MT (percentage) en het aantal transcripties.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="vrije-opdracht.html#cb9-1" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb9-2"><a href="vrije-opdracht.html#cb9-2" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">FeatureScatter</span>(pbmc.seurat.obj, <span class="at">feature1 =</span> <span class="st">&quot;nCount_RNA&quot;</span>, <span class="at">feature2 =</span> <span class="st">&quot;percent.mt&quot;</span>)</span>
+<span id="cb9-3"><a href="vrije-opdracht.html#cb9-3" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">FeatureScatter</span>(pbmc.seurat.obj, <span class="at">feature1 =</span> <span class="st">&quot;nCount_RNA&quot;</span>, <span class="at">feature2 =</span> <span class="st">&quot;nFeature_RNA&quot;</span>)</span>
+<span id="cb9-4"><a href="vrije-opdracht.html#cb9-4" tabindex="-1"></a>plot1 <span class="sc">+</span> plot2</span></code></pre></div>
+<p><img src="portfolio_DSFB2_files/figure-html/correlation-1.png" alt="" width="672" /></p>
+<p>Zoals in de bovenstaande grafieken te zien is kloppen de verwachtingen, waardoor er verder kan worden gegagaan met het filteren. De lage kwaliteit cellen gebasseerd op het aantal genen en MT percentages worden eruit gefiltert.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="vrije-opdracht.html#cb10-1" tabindex="-1"></a><span class="co">#Threshhold is based on the violin plot </span></span>
+<span id="cb10-2"><a href="vrije-opdracht.html#cb10-2" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(pbmc.seurat.obj, <span class="at">subset =</span> nFeature_RNA <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">&amp;</span> nFeature_RNA <span class="sc">&lt;</span> <span class="dv">2500</span> <span class="sc">&amp;</span> </span>
+<span id="cb10-3"><a href="vrije-opdracht.html#cb10-3" tabindex="-1"></a>                   percent.mt <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="vrije-opdracht.html#cb11-1" tabindex="-1"></a><span class="co">#3. normalize data</span></span>
+<span id="cb11-2"><a href="vrije-opdracht.html#cb11-2" tabindex="-1"></a><span class="co">#Divide gene measurement in each cell by the total expression multiplied by a scaling factor, log trasnsform </span></span>
+<span id="cb11-3"><a href="vrije-opdracht.html#cb11-3" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(pbmc.seurat.obj)</span></code></pre></div>
+<pre><code>## Normalizing layer: counts</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="vrije-opdracht.html#cb13-1" tabindex="-1"></a><span class="co">#Find slot command, post filtering the information has been saved </span></span>
+<span id="cb13-2"><a href="vrije-opdracht.html#cb13-2" tabindex="-1"></a><span class="fu">str</span>(pbmc.seurat.filtered)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="vrije-opdracht.html#cb14-1" tabindex="-1"></a><span class="co">#Most of the time, the nfeatures value is between 2000 and 5000 </span></span>
+<span id="cb14-2"><a href="vrije-opdracht.html#cb14-2" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(pbmc.seurat.filtered, <span class="at">selection.method =</span> <span class="st">&quot;vst&quot;</span>, <span class="at">nfeatures =</span> <span class="dv">2000</span>)</span></code></pre></div>
+<pre><code>## Finding variable features for layer counts</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="vrije-opdracht.html#cb16-1" tabindex="-1"></a><span class="co">#Check top 1 highly variable genes</span></span>
+<span id="cb16-2"><a href="vrije-opdracht.html#cb16-2" tabindex="-1"></a>top10_HVG <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">VariableFeatures</span>(pbmc.seurat.filtered), <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="vrije-opdracht.html#cb17-1" tabindex="-1"></a><span class="co">#Plot variable features </span></span>
+<span id="cb17-2"><a href="vrije-opdracht.html#cb17-2" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">VariableFeaturePlot</span>(pbmc.seurat.filtered)</span>
+<span id="cb17-3"><a href="vrije-opdracht.html#cb17-3" tabindex="-1"></a><span class="fu">LabelPoints</span>(<span class="at">plot =</span> plot1, <span class="at">points =</span> top10_HVG, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="portfolio_DSFB2_files/figure-html/HVG_plot-1.png" alt="" width="672" /></p>
+<p>Datascaling</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="vrije-opdracht.html#cb18-1" tabindex="-1"></a><span class="co">#Acount for sources of variance </span></span>
+<span id="cb18-2"><a href="vrije-opdracht.html#cb18-2" tabindex="-1"></a><span class="co">#Biologival sources: Difference in cell cycle </span></span>
+<span id="cb18-3"><a href="vrije-opdracht.html#cb18-3" tabindex="-1"></a><span class="co">#Technical noise: Bacth effect </span></span>
+<span id="cb18-4"><a href="vrije-opdracht.html#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="vrije-opdracht.html#cb18-5" tabindex="-1"></a>all.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(pbmc.seurat.filtered)</span>
+<span id="cb18-6"><a href="vrije-opdracht.html#cb18-6" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(pbmc.seurat.filtered, <span class="at">features =</span> all.genes)</span></code></pre></div>
+<p>PCA</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="vrije-opdracht.html#cb19-1" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">RunPCA</span>(pbmc.seurat.filtered, <span class="at">features =</span> <span class="fu">VariableFeatures</span>(<span class="at">object =</span> pbmc.seurat.filtered))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="vrije-opdracht.html#cb20-1" tabindex="-1"></a><span class="fu">print</span>(pbmc.seurat.filtered[[<span class="st">&quot;pca&quot;</span>]], <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">nfeatures =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## PC_ 1 
+## Positive:  LYZ, CST3, FCN1, IFI30, S100A9 
+## Negative:  IFITM1, LTB, IL32, TCF7, IL7R 
+## PC_ 2 
+## Positive:  IL32, IFITM1, CD7, CD247, IL7R 
+## Negative:  MS4A1, CD79A, BANK1, LINC00926, IGHM 
+## PC_ 3 
+## Positive:  NKG7, CST7, GZMB, GNLY, GZMA 
+## Negative:  LEF1, CCR7, TCF7, MAL, IL7R 
+## PC_ 4 
+## Positive:  CAVIN2, PRKAR2B, PPBP, GNG11, TUBB1 
+## Negative:  TMSB10, CD37, NKG7, PRF1, GZMA 
+## PC_ 5 
+## Positive:  LILRA4, SERPINF1, CLEC4C, LRRC26, IL3RA 
+## Negative:  LINC00926, MS4A1, FCER2, BANK1, FCRL3</code></pre>
+<p>Om te kijken hoeveel principle components gebruikt moeten worden in de downstream analyse kan er een elbowplot gemaakt worden, waarbij de “ellenboog” van de plot het aantal PCs is wat gebruikt kan worden.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="vrije-opdracht.html#cb22-1" tabindex="-1"></a><span class="co">#Determine only significant principle components which capture the signal in Down stream analysis </span></span>
+<span id="cb22-2"><a href="vrije-opdracht.html#cb22-2" tabindex="-1"></a><span class="fu">ElbowPlot</span>(pbmc.seurat.filtered, <span class="at">ndims =</span> <span class="fu">ncol</span>(<span class="fu">Embeddings</span>(pbmc.seurat.filtered, <span class="st">&quot;pca&quot;</span>)))</span></code></pre></div>
+<p><img src="portfolio_DSFB2_files/figure-html/elbow_plot-1.png" alt="" width="672" /></p>
+<p>Uit de elbowplot heb ik ervoor gekozen om 15 PCs te gebruiken voor downstream analysis. De volgende stap is om de cellen te clusteren.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="vrije-opdracht.html#cb23-1" tabindex="-1"></a><span class="co">#Cells with similair feature expression patterns are clustered together </span></span>
+<span id="cb23-2"><a href="vrije-opdracht.html#cb23-2" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">FindNeighbors</span>(pbmc.seurat.filtered, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code></pre></div>
+<p>Bij het clusteren kan er gekeken worden naar de resolutie van de clusters. Door verschillende resoluties in een grafiek te zien kan er gezien worden bij welke resolutie de clusters het beste eruit zien.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="vrije-opdracht.html#cb24-1" tabindex="-1"></a><span class="co">#See which resolution works best to distinct the cells into different clusters </span></span>
+<span id="cb24-2"><a href="vrije-opdracht.html#cb24-2" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">FindClusters</span>(pbmc.seurat.filtered, <span class="at">resolution =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="vrije-opdracht.html#cb25-1" tabindex="-1"></a><span class="co">#Plot to see which resolution works best </span></span>
+<span id="cb25-2"><a href="vrije-opdracht.html#cb25-2" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc.seurat.filtered, <span class="at">group.by =</span> <span class="st">&quot;RNA_snn_res.1&quot;</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="portfolio_DSFB2_files/figure-html/resolution_cluster_plot-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="vrije-opdracht.html#cb26-1" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc.seurat.filtered, <span class="at">group.by =</span> <span class="st">&quot;RNA_snn_res.0.3&quot;</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="portfolio_DSFB2_files/figure-html/resolution_cluster_plot-2.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="vrije-opdracht.html#cb27-1" tabindex="-1"></a><span class="co">#Change resolution </span></span>
+<span id="cb27-2"><a href="vrije-opdracht.html#cb27-2" tabindex="-1"></a><span class="fu">Idents</span>(pbmc.seurat.filtered) <span class="ot">&lt;-</span> <span class="st">&quot;RNA_snn_res.0.3&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="vrije-opdracht.html#cb28-1" tabindex="-1"></a><span class="co">#Perform non-linear dimensionality reduction for display</span></span>
+<span id="cb28-2"><a href="vrije-opdracht.html#cb28-2" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">RunUMAP</span>(pbmc.seurat.filtered, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code></pre></div>
+<pre><code>## Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
+## To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
+## This message will be shown once per session</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="vrije-opdracht.html#cb30-1" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc.seurat.filtered, <span class="at">reduction =</span> <span class="st">&quot;umap&quot;</span>)</span></code></pre></div>
+<p><img src="portfolio_DSFB2_files/figure-html/UMAN_plot-1.png" alt="" width="672" /></p>
+<p>Annotating clusters</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="vrije-opdracht.html#cb31-1" tabindex="-1"></a><span class="co">#One reference based approach</span></span>
+<span id="cb31-2"><a href="vrije-opdracht.html#cb31-2" tabindex="-1"></a><span class="co">#Pick a reference that you expect to be in the dataset </span></span>
+<span id="cb31-3"><a href="vrije-opdracht.html#cb31-3" tabindex="-1"></a>ref <span class="ot">&lt;-</span> celldex<span class="sc">::</span><span class="fu">HumanPrimaryCellAtlasData</span>()</span>
+<span id="cb31-4"><a href="vrije-opdracht.html#cb31-4" tabindex="-1"></a><span class="co">#Check celltypes that are available in the reference </span></span>
+<span id="cb31-5"><a href="vrije-opdracht.html#cb31-5" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">GetAssayData</span>(pbmc.seurat.filtered, <span class="at">layer =</span> <span class="st">&#39;counts&#39;</span>)</span>
+<span id="cb31-6"><a href="vrije-opdracht.html#cb31-6" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> <span class="fu">SingleR</span>(<span class="at">test =</span> pbmc, </span>
+<span id="cb31-7"><a href="vrije-opdracht.html#cb31-7" tabindex="-1"></a>        <span class="at">ref =</span> ref, </span>
+<span id="cb31-8"><a href="vrije-opdracht.html#cb31-8" tabindex="-1"></a>        <span class="at">labels =</span> ref<span class="sc">$</span>label.main)</span>
+<span id="cb31-9"><a href="vrije-opdracht.html#cb31-9" tabindex="-1"></a>pbmc.seurat.filtered<span class="sc">$</span>singleR.labels <span class="ot">&lt;-</span> prediction<span class="sc">$</span>labels[<span class="fu">match</span>(<span class="fu">rownames</span>(pbmc.seurat.filtered<span class="sc">@</span>meta.data), <span class="fu">rownames</span>(prediction))]</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="vrije-opdracht.html#cb32-1" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc.seurat.filtered, <span class="at">reduction =</span> <span class="st">&quot;umap&quot;</span>, <span class="at">group.by =</span> <span class="st">&quot;singleR.labels&quot;</span>)</span></code></pre></div>
+<p><img src="portfolio_DSFB2_files/figure-html/annotating_plot-1.png" alt="" width="672" /></p>
 
+</div>
 </div>
 </div>
             </section>

@@ -181,7 +181,7 @@ pK <- bcmvn_pbmc %>%
   select(pK)
 pK <- as.numeric(as.character(pK[[1]]))
 
-#Calculate expexted numver of doublets 
+#Calculate expexted number of doublets 
 #See for each cell what cluster they belong to 
 annotations <- pbmc.seurat.filtered@meta.data$seurat_clusters
 
