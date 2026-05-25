@@ -238,10 +238,7 @@ ggsave(
 table(pbmc.seurat.filtered@meta.data$DF.classifications_0.25_0.19_729)
 
 #Filter out doublets 
-
-
-
-
+pbmc.seurat.filtered <- subset(pbmc.seurat.filtered, DF.classifications_0.25_0.19_729 == "Singlet")
 
 #9. Annotate each cluster 
 #One reference based approach
@@ -259,12 +256,28 @@ prediction <- SingleR(test = pbmc,
         labels = ref$label.main)
 
 pbmc.seurat.filtered$singleR.labels <- prediction$labels[match(rownames(pbmc.seurat.filtered@meta.data), rownames(prediction))]
-DimPlot(pbmc.seurat.filtered, reduction = "umap", group.by = "singleR.labels")
+umap <- DimPlot(pbmc.seurat.filtered, reduction = "umap", group.by = "singleR.labels")
+
+#SAve image 
+ggsave(
+  filename = "images/images_030/umap_after_db_rm.png",
+  plot = umap,
+  width = 6,
+  height = 4,
+  dpi = 300
+)
 
 #Calculate performance 
 prediction$scores
 
-plotScoreHeatmap(prediction)
+heatmap <- plotScoreHeatmap(prediction)
+ggsave(
+  filename = "images/images_030/umap_prediction_after_db_rm.png",
+  plot = heatmap,
+  width = 6,
+  height = 4,
+  dpi = 300
+)
 
 #Plot delta values, to assess poor quality 
 #Low delta values, assigning is uncertain 
@@ -275,37 +288,120 @@ plotDeltaDistribution(prediction)
 
 #Compare to unsupervised clustering 
 tab <- table(Assigned=prediction$labels, Clusters=pbmc.seurat.filtered$seurat_clusters)
-pheatmap(log10(tab+10), color = colorRampPalette(c("white", "blue"))(10))
+clustering <- pheatmap(log10(tab+10), color = colorRampPalette(c("white", "blue"))(10))
 View(pbmc.seurat.filtered@meta.data)
 
-#Marker based approach 
+ggsave(
+  filename = "images/images_030/cluster_prediction.png",
+  plot = clustering,
+  width = 6,
+  height = 4,
+  dpi = 300
+)
+
+## Exploratory analysis
+
+#Marker Gene Detection 
+#To vallidate annotation 
+Idents(pbmc.seurat.filtered) <- "singleR.labels"
+
+markers <- FindAllMarkers(
+  pbmc.seurat.filtered,
+  only.pos = TRUE,
+  min.pct = 0.25,
+  logfc.threshold = 0.25
+)
+
+top10 <- markers %>%
+  group_by(cluster) %>%
+  slice_max(avg_log2FC, n = 10)
+
+#Make a DotPlot with genes known in pbmc cells
+marker_gene <- DotPlot(
+  pbmc.seurat.filtered,
+  features = c(
+    "CD3D",
+    "MS4A1",
+    "NKG7",
+    "LYZ"
+  )
+) + RotatedAxis()
 
 
+ggsave(
+  filename = "images/images_030/marker_gene_detection.png",
+  plot = marker_gene,
+  width = 6,
+  height = 4,
+  dpi = 300
+)
 
-#10. Pseudotemporal cell ordering 
+#Differential expression analysis 
+#This step can be used to validate the clustering 
+#Make sure that cell types are used 
+Idents(pbmc.seurat.filtered) <- "singleR.labels"
 
-#Trajectory analysis 
-View(pbmc.seurat.filtered)
+#Perform differantial gene expression analysis between cell types 
+#Compare the gene expression of T cells with NK cells. 
+DE <- FindMarkers(
+  pbmc.seurat.filtered, 
+  ident.1="T_cells", 
+  ident.2="NK_cell"
+) 
 
+#Add gene colname 
+DE$gene <- rownames(DE)
 
+#Create DE table 
+DE <- DE[, c(
+  "gene",
+  "avg_log2FC",
+  "p_val",
+  "p_val_adj",
+  "pct.1",
+  "pct.2"
+)]
 
-#Exploratory analysis
+DE$significant <- ifelse(
+  DE$p_val_adj < 0.05 &
+    abs(DE$avg_log2FC) > 0.25,
+  "Sig",
+  "Not Sig"
+)
 
-#DEG analysis 
+ggplot(DE,
+       aes(x = avg_log2FC,
+           y = -log10(p_val_adj))) +
+  geom_point(aes(color = significant), alpha = 0.6) +
+  theme_classic() +
+  labs(
+    title = "T cells vs NK cells",
+    x = "Log2 Fold Change",
+    y = "-Log10 Adjusted P-value"
+  )
 
-#GO/KEGG enrichment 
+#Choose top DE genes
+top_genes_DE <- rownames(head(DE[order(DE$p_val_adj), ], 5))
 
-#GSVA 
+Top5_genes <- VlnPlot(pbmc.seurat.filtered, features = top_genes_DE, idents = c("T_cells", "NK_cell"), 
+        ncol = 3, cols = c('red', 'blue')) 
 
-#TF identification 
+ggsave(
+  filename = "images/images_030/DE_NK_T.png",
+  plot = Top5_genes,
+  width = 6,
+  height = 4,
+  dpi = 300
+) 
 
-#Cell trajectory 
-
-#Cell-cell interaction 
-
-#Cell Cycle 
-
-#Spatial transcriptome 
+Top5_genes_feature <- FeaturePlot(pbmc.seurat.filtered, features = top_genes_DE[1:2], ncol = 2)
+ggsave(
+  filename = "images/images_030/DE_NK_T_featureplot.png",
+  plot = Top5_genes_feature,
+  width = 6,
+  height = 4,
+  dpi = 300
+) 
 
 
 

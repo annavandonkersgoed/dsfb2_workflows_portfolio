@@ -1,0 +1,2 @@
+De data in het bestand komt vanuit 10xGenomics en bevat human peripheral blood mononuclear cells (PBMCs) van een gezonde 27 jarige man.
+De dataset is een countmatrix gemaakt voor verdere analyse van single cell RNA sequencing. 

@@ -4,11 +4,11 @@ output: html_document
 
 # Vrije opdracht
 
-In dit gedeelte van het portfolio laat ik een techniek zien waar ik intersse voor heb. Dit gedeelte bestaat uit drie delen. In het eerste gedeelte vertel ik over de techniek en waarom het van toepassing voor mij is om dit te leren. Daarna staat mijn planning om deze techniek te leren en als laatste is een workflow met voorbeelden hoe ik de techniek geleerd heb
+In dit gedeelte van het portfolio laat ik een techniek zien waar ik interesse voor heb. Dit gedeelte bestaat uit drie delen. In het eerste gedeelte vertel ik over de techniek en waarom het van toepassing voor mij is om dit te leren. Daarna staat mijn planning om deze techniek te leren en als laatste is een workflow met voorbeelden hoe ik de techniek geleerd heb en kan gebruiken.
 
 ## Onderbouwing gebasseerd op toekomstplan
 
-Voor dit onderdeel heb ik gekozen om single cell RNA sequencing data te analyseren. Dit vooral omdat dit te maken gaat hebben met mijn stage. Hierbij wordt er namelijk gekeken naar de interactie tussen bacteriën en humane cellen. Deze techniek kan goed gebruikt worden om te kijken naar de individuele cellen, aangezien niet alle bacteriën in alle cellen gaan zitten. Daarnaast ga ik als techniek ook flow sorting doen van humane cellen, dus past deze analyse er goed in. Ook in de toekomst zou het me interessant lijken om deze techniek verder te gebruiken om te kijken welke cellen er bijvoorbeeld in kankerpatiënten zitten en of cellen bepaalde pathhways gebruiken in de aanwezigheid van bacteriën om bijvoorbeeld chemoresistentie te onderzoeken. Vanuit deze redenen lijkt het me handig om meer inzicht in deze skill te hebben.
+Voor dit onderdeel heb ik gekozen om single cell RNA sequencing data te analyseren. Dit vooral omdat dit te maken gaat hebben met mijn stage. Hierbij wordt er namelijk gekeken naar de interactie tussen bacteriën en humane cellen. Deze techniek kan goed gebruikt worden om te kijken naar de individuele cellen, aangezien niet alle bacteriën in alle cellen binnen dringen. Daarnaast ga ik als techniek ook flow sorting doen van humane cellen, dus past deze analyse er goed in. Ook in de toekomst zou het me interessant lijken om deze techniek verder te gebruiken om te kijken welke cellen er bijvoorbeeld in kankerpatiënten zitten en of cellen bepaalde pathhways gebruiken in de aanwezigheid van bacteriën om bijvoorbeeld chemoresistentie te onderzoeken. Vanuit deze redenen lijkt het me handig om meer inzicht in deze skill te hebben.
 
 Als doel van dit onderdeel wil ik voor mezelf een workflow opstellen zodat ik later dit bestand terug kan halen en makkelijk de stappen voor de analyses kan uitvoeren en begrijpen.
 
@@ -17,7 +17,7 @@ Als doel van dit onderdeel wil ik voor mezelf een workflow opstellen zodat ik la
 Tijdens deze opdracht wordt er 32 uur besteed om de skill te leren. Op het einde van de opdracht zal ik reflecteren op deze planning en kijken wat er in de toekomst beter kan.
 
 | Aantal uur | Content |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | Dag 1 |  |
 | 2h | Inlezen over het onderwerp, wat is de standaard workflow |
 | 1h | Inlezen over het onderwerp, wat zijn de methodes die kunnen worden gebruikt en in wat voor onderzoek wordt deze techniek gebruikt. |
@@ -72,7 +72,7 @@ pbmc.n <- Read10X_h5(filename = "raw_data/Data020/sc5p_v2_hs_PBMC_10k_raw_featur
 str(pbmc.n)
 ```
 
-Zoals te zien zijn er twee verschillende countmatrixen aanwezig in de data. Voor deze analyse werken we verder met de matrix genaamd Gene Expression.
+Zoals te zien zijn er twee verschillende lists aanwezig in de data. Voor deze analyse werken we verder met de matrix genaamd Gene Expression.
 
 ```{r pick_list}
 pbmc_counts <- pbmc.n$`Gene Expression`
@@ -116,6 +116,8 @@ pbmc.seurat.filtered <- subset(pbmc.seurat.obj, subset = nFeature_RNA > 200 & nF
                    percent.mt < 5)
 ```
 
+Na het filteren wordt de data genormaliseerd, aangezien het aantal RNA verschilt per cel. De features worden genormaliseerd tegen de totale expressie.
+
 ```{r normalize, echo=TRUE, results='hide'}
 #3. normalize data
 #Divide gene measurement in each cell by the total expression multiplied by a scaling factor, log trasnsform 
@@ -124,6 +126,8 @@ pbmc.seurat.filtered <- NormalizeData(pbmc.seurat.obj)
 str(pbmc.seurat.filtered)
 
 ```
+
+Na het normaliseren worden de high variable genes gekozen. Dit wordt gedaan omdat cellen met een lage expressie of met vergelijkbare expressie niet veel informatie bieden voor het onderscheiden van de verschillende groepen.
 
 ```{r HVG, echo=TRUE, results='hide'}
 #Most of the time, the nfeatures value is between 2000 and 5000 
@@ -138,7 +142,7 @@ plot1 <- VariableFeaturePlot(pbmc.seurat.filtered)
 LabelPoints(plot = plot1, points = top10_HVG, repel = TRUE)
 ```
 
-Datascaling
+Nadat de high variable genes zijn geplot moet de data is gescaled worden, aangezien sommige genen in het algemeen meer tot expressie komen dan andere genen.
 
 ```{r Data_scaling, echo=TRUE, results='hide', message=FALSE}
 #Acount for sources of variance 
@@ -150,7 +154,7 @@ pbmc.seurat.filtered <- ScaleData(pbmc.seurat.filtered, features = all.genes)
 
 ```
 
-PCA
+Voordat verdere analyse kan worden uitgevoerd moet er een dimensie reductie analyse uitgevoerd worden. Hierdoor is de data meer compact waardoor er sneller mee gewerkt kan worden.
 
 ```{r PCA, echo=TRUE, results='hide', message=FALSE}
 pbmc.seurat.filtered <- RunPCA(pbmc.seurat.filtered, features = VariableFeatures(object = pbmc.seurat.filtered))
@@ -202,7 +206,7 @@ pbmc.seurat.filtered <- RunUMAP(pbmc.seurat.filtered, dims = 1:15)
 DimPlot(pbmc.seurat.filtered, reduction = "umap")
 ```
 
-Annotating clusters
+Nadat de cellen zijn geclusterd worden ze geannoteerd. In dit geval worden de clusters vergeleken met een referentie dataset.
 
 ```{r annotating}
 #One reference based approach
@@ -220,7 +224,7 @@ pbmc.seurat.filtered$singleR.labels <- prediction$labels[match(rownames(pbmc.seu
 DimPlot(pbmc.seurat.filtered, reduction = "umap", group.by = "singleR.labels")
 ```
 
-Check if cluster performance
+Om de clustering te vallideren kunnen de scores berekent worden die aangeven hoe goed het celltype matcht met het celltype in de database. Hiervan kan een heathmap worden gemaakt. In de heatmap is te zien dat de hoge scoren (geel) matchen meet de labels.
 
 ```{r prediction, echo=TRUE, results='hide', message=FALSE}
 #Calculate performance 
@@ -233,20 +237,19 @@ plotScoreHeatmap(prediction)
 
 De volgende stappen in de analyses zijn omschreven met tekst in figuren omdat ze veel lange stappen bevatten. Om deze grafieken ook uit te voeren kan naar het Rscript verwezen worden.
 
-## Removing doublets
+### Removing doublets
 
-De doublets in de dataset werd verwijderd met de R package DoubletFinder. 3 parameters zijn belangrijk in deze package:
+De doublets in de dataset werden verwijderd met de R package DoubletFinder. Deze stap wordt gedaan na de non-linear dimensionality reduction en voor de annotatie. 3 parameters zijn belangrijk in deze package:
 
-- pK: 
+- pK: Neighborhood size, waarbij er wordt gekeken naar hoeveel cellen er worden meegenomen in PC ruimtes.
 
-- PN: 
+- PN: Proportie van artifical doublets. Dit zijn fake doublets die gecreëerd zijn door het gemiddelde te nemen van random cellen.
 
-- Exp
+- Exp: Aantal doublets dat wordt verwacht. Dit is gebasseerd op een dataset vanuit de 10X site
 
-De PN variable heeft niet veel invloed op de analyse, maar de pK waarde wel. Daarom is het belangrijk om de optimale pK waarde te berekenen. Nadat deze is berekend kunnen het aantal doublets berekend worden. 
+De PN variable heeft niet veel invloed op de analyse, maar de pK waarde wel. Daarom is het belangrijk om de optimale pK waarde te berekenen. Nadat deze is berekend kunnen het aantal doublets berekend worden.
 
-
-```{r foldertree,  out.width = "700px", fig.cap="Folder tree cursus dsfb1", echo = FALSE}
+```{r doublets,  out.width = "700px", fig.cap="doublets in cluster", echo = FALSE}
 knitr::include_graphics(
   here::here(
     "images", "images_030",
@@ -256,4 +259,74 @@ knitr::include_graphics(
 
 ```
 
-In dit figuur is te zien dat onder de gekozen stappen eerder in de analyse de optimale pK een waarde heeft van 0.19. 
+Zoals te zien is in figuur 4.1 hebben sommige clusters doublets. Deze worden eruit gefilterd voordat de data verder verwerkt kan worden.
+
+UMAP plot na het verwijderen van de doublets:
+
+```{r after_db_rm,  out.width = "700px", fig.cap="UMAP after removing doublets", echo = FALSE}
+knitr::include_graphics(
+  here::here(
+    "images", "images_030",
+    "umap_after_db_rm.png"
+  )
+)
+
+```
+
+UMAP predictions na het verwijderen van de doublets:
+
+```{r after_db_rm_prediction,  out.width = "700px", fig.cap="Cluster prediction after removing doublets", echo = FALSE}
+knitr::include_graphics(
+  here::here(
+    "images", "images_030",
+    "umap_prediction_after_db_rm.png"
+  )
+)
+
+```
+
+### Exploratory analysis
+
+Nadat de general analysis is uitgevoerd kan er gekeken worden naar de biologische processen van de dataset met verschillende exporatory analysis. In dit geval zijn er twee exploratory analysis uitgevoerd.
+
+De eerste analyse is een Marker Gene Detection. Hierbij kan worden gekeken welke genen er specifiek hoog of laag zijn in een cluster en kan er een dotplot meegemaakt worden. Voor deze analyse zijn er drie markers genes gekozen die bekend staan voor specifieke cellen:
+
+- CD3D: T cellen
+
+- MS4A1: B cellen 
+
+- NKG7: NK cellen 
+
+- LYZ: monocytes 
+
+```{r marker_gene,  out.width = "700px", fig.cap= "Marker gene detection analyse", echo = FALSE}
+knitr::include_graphics(
+  here::here(
+    "images", "images_030",
+    "marker_gene_detection.png"
+  )
+)
+
+```
+
+Uit de marker gene detection kan worden gezien dat de meeste gene markesr overeen komen met het celtypen. Alleen bij de LYZ gene marker zijn er verschillende celtypen te zien. LYZ codeert voor lysozyme, wat ook actief kan zijn in de aangewezen cellen. 
+
+
+Na het analyseren van de Marker genes kan er worden gekeken naar differentiële expressie analyse. 
+DEG analysis wordt gebruikt om genen die een significant verschil tonen in expressie te identificeren tussen de verschillende celgroepen. Hierbij kan er gekeken worden naar de up of down regulation van genen.
+
+In deze analyse wordt er gekeken naar de expressie van genen tussen T cellen en NK cellen. Er wordt verwacht dat de cellen erg verschillen in expressie. 
+
+```{r DE_analysis,  out.width = "700px", fig.cap= "Violin plot DE analyse", echo = FALSE}
+knitr::include_graphics(
+  here::here(
+    "images", "images_030",
+    "DE_NK_T.png"
+  )
+)
+```
+
+Uit de grafiek kan worden gezien dat er een verschil is tussen de cellen met betrekking tot gen expressie. In de violin plot is er vooral te zien dat er veel expressie is bij NK cellen en minder bij T cellen. Dit klopt aangezien de vijf genen gerelateerd zijn met NK cellen. 
+
+### Voor de toekomst 
+Na het vergelijken van de clusters met elkaar lijkt het me ook interessant om meer verschillende analyses uit te voeren. Aangezien ik toch langer bezig was met de onderdelen in mijn planning dan verwacht heb ik niet alles kunnen uitvoeren wat ik zou willen. Dit ga ik in de toekomst zeker nog doen. Naast de exploratory analysis die nu zijn uitgevoerd wil ik pathway enrichment analysis gaan doen om te kijken naar de biologische processen die betrekking hebben met de clusters en de transcripties. Dit kan gedaan worden door een GO-analyse of door een KEGG-analyse. Daarnaast wil ik verschillende annotatie methodes gebruiken om te kijken welke het beste werkt en een pseudotime analyse uit te voeren om de verschillende differentiaties van de cellen te zien. Daarnaast lijkt het me interessant om een dataset te analyseren met twee condities, zoals treated en untreated om deze met elkaar te vergelijken. Voor in de toekomst heb ik al wat kennis, aangezien ik over de analysis heb gelezen en de general analysis begrijp.  
