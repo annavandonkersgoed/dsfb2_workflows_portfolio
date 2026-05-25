@@ -443,6 +443,11 @@ div.csl-indent {
 <span id="cb31-9"><a href="vrije-opdracht.html#cb31-9" tabindex="-1"></a>pbmc.seurat.filtered<span class="sc">$</span>singleR.labels <span class="ot">&lt;-</span> prediction<span class="sc">$</span>labels[<span class="fu">match</span>(<span class="fu">rownames</span>(pbmc.seurat.filtered<span class="sc">@</span>meta.data), <span class="fu">rownames</span>(prediction))]</span></code></pre></div>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="vrije-opdracht.html#cb32-1" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc.seurat.filtered, <span class="at">reduction =</span> <span class="st">&quot;umap&quot;</span>, <span class="at">group.by =</span> <span class="st">&quot;singleR.labels&quot;</span>)</span></code></pre></div>
 <p><img src="portfolio_DSFB2_files/figure-html/annotating_plot-1.png" alt="" width="672" /></p>
+<p>Check if cluster performance</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="vrije-opdracht.html#cb33-1" tabindex="-1"></a><span class="co">#Calculate performance </span></span>
+<span id="cb33-2"><a href="vrije-opdracht.html#cb33-2" tabindex="-1"></a>prediction<span class="sc">$</span>scores</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="vrije-opdracht.html#cb34-1" tabindex="-1"></a><span class="fu">plotScoreHeatmap</span>(prediction)</span></code></pre></div>
+<p><img src="portfolio_DSFB2_files/figure-html/prediction_plot-1.png" alt="" width="672" /></p>
 
 </div>
 </div>

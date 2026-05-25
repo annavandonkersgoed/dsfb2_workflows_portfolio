@@ -219,3 +219,14 @@ pbmc.seurat.filtered$singleR.labels <- prediction$labels[match(rownames(pbmc.seu
 DimPlot(pbmc.seurat.filtered, reduction = "umap", group.by = "singleR.labels")
 ```
 
+Check if cluster performance 
+
+```{r prediction, echo=TRUE, results='hide', message=FALSE}
+#Calculate performance 
+prediction$scores
+```
+
+```{r prediction_plot}
+plotScoreHeatmap(prediction)
+```
+
