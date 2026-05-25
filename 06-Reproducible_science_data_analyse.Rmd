@@ -32,7 +32,7 @@ Celegans_dataset <- read_excel(here::here("raw_data", "Data010", "CE.LIQ.FLOW.06
 
 Na het inlezen van de data wordt de data gecontroleerd op wat voor type het is.
 
-```{r, controleren data, eval = FALSE}
+```{r controle, eval = FALSE}
 str(Celegans_dataset)
 ```
 

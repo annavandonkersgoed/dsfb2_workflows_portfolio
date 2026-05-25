@@ -169,6 +169,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#general-analysis"><i class="fa fa-check"></i><b>4.3.1</b> General analysis</a></li>
 </ul></li>
+<li class="chapter" data-level="4.4" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#removing-doublets"><i class="fa fa-check"></i><b>4.4</b> Removing doublets</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="data-management-deel-1.html"><a href="data-management-deel-1.html"><i class="fa fa-check"></i><b>5</b> Data management deel 1</a></li>
 <li class="chapter" data-level="6" data-path="data-management-deel-2.html"><a href="data-management-deel-2.html"><i class="fa fa-check"></i><b>6</b> Data management deel 2</a></li>
@@ -213,8 +214,8 @@ div.csl-indent {
 <p>Tijdens deze opdracht wordt er 32 uur besteed om de skill te leren. Op het einde van de opdracht zal ik reflecteren op deze planning en kijken wat er in de toekomst beter kan.</p>
 <table>
 <colgroup>
-<col width="22%" />
-<col width="77%" />
+<col width="25%" />
+<col width="75%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -448,8 +449,26 @@ div.csl-indent {
 <span id="cb33-2"><a href="vrije-opdracht.html#cb33-2" tabindex="-1"></a>prediction<span class="sc">$</span>scores</span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="vrije-opdracht.html#cb34-1" tabindex="-1"></a><span class="fu">plotScoreHeatmap</span>(prediction)</span></code></pre></div>
 <p><img src="portfolio_DSFB2_files/figure-html/prediction_plot-1.png" alt="" width="672" /></p>
-
+<p>De volgende stappen in de analyses zijn omschreven met tekst in figuren omdat ze veel lange stappen bevatten. Om deze grafieken ook uit te voeren kan naar het Rscript verwezen worden.</p>
 </div>
+</div>
+<div id="removing-doublets" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Removing doublets<a href="vrije-opdracht.html#removing-doublets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>De doublets in de dataset werd verwijderd met de R package DoubletFinder. 3 parameters zijn belangrijk in deze package:</p>
+<ul>
+<li><p>pK:</p></li>
+<li><p>PN:</p></li>
+<li><p>Exp</p></li>
+</ul>
+<p>De PN variable heeft niet veel invloed op de analyse, maar de pK waarde wel. Daarom is het belangrijk om de optimale pK waarde te berekenen. Nadat deze is berekend kunnen het aantal doublets berekend worden.</p>
+<div class="figure"><span style="display:block;" id="fig:foldertree"></span>
+<img src="images/images_030/umap.doublets.png" alt="Folder tree cursus dsfb1" width="700px" />
+<p class="caption">
+Figure 4.1: Folder tree cursus dsfb1
+</p>
+</div>
+<p>In dit figuur is te zien dat onder de gekozen stappen eerder in de analyse de optimale pK een waarde heeft van 0.19.</p>
+
 </div>
 </div>
             </section>

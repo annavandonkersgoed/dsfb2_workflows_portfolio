@@ -16,10 +16,10 @@ library(pheatmap)
 #Data analysis 
 #Separate script
 
-# 1. Load in the count matrix and create a Seurat object 
+## Step 1 
+#Load in the libraries and create a Seurat object 
 
 #Load in count matrix 
-
 pbmc.n <- Read10X_h5(filename = "raw_data/Data020/sc5p_v2_hs_PBMC_10k_raw_feature_bc_matrix.h5")
 #Check count matrix 
 str(pbmc.n)
@@ -37,9 +37,11 @@ str(pbmc.seurat.obj)
 
 
 #General analysis 
-# 2. QC on data 
+## Step 2
+#QC filter on data 
+
 View(pbmc.seurat.obj@meta.data)
-#Check for poor quality cells or doublets 
+#Check for poor quality cells 
 
 #Check mitochondrial transcript (MT) percentage. dying/low quality cells have hgher MT concentrations 
 pbmc.seurat.obj[["percent.mt"]] <- PercentageFeatureSet(pbmc.seurat.obj, pattern = "^MT[-\\.]")
@@ -163,7 +165,6 @@ DimPlot(pbmc.seurat.filtered, reduction = "umap")
 #Filter out doublets in dataset 
 
 #Test different Pk values 
-
 sweep.res.list_pbmc <- paramSweep(pbmc.seurat.filtered, PCs = 1:15, sct = FALSE)
 sweep.stats_pbmc <- summarizeSweep(sweep.res.list_pbmc, GT= FALSE)
 #Find optimal pK value 
@@ -171,9 +172,18 @@ bcmvn_pbmc <- find.pK(sweep.stats_pbmc)
 
 
 #Plot Pk against BCmetric 
-ggplot(bcmvn_pbmc, aes(pK, BCmetric, group = 1)) +
+pK <- ggplot(bcmvn_pbmc, aes(pK, BCmetric, group = 1)) +
   geom_point()+
   geom_line()
+
+#SAve image 
+ggsave(
+  filename = "images/images_030/BCmetric_plot.png",
+  plot = pK,
+  width = 6,
+  height = 4,
+  dpi = 300
+)
 
 #Store optimal pK value to pK variable 
 pK <- bcmvn_pbmc %>% 
@@ -209,7 +219,29 @@ pbmc.seurat.filtered <- doubletFinder(pbmc.seurat.filtered,
                                       pN = 0.25, 
                                       pK = pK, 
                                       nExp = nExp.poi_adj, 
-                                      reuse.pANN = FALSE, sct = FALSE)
+                                      reuse.pANN = NULL, sct = FALSE)
+
+
+#Visualize doublets 
+db <- DimPlot(pbmc.seurat.filtered, reduction = 'umap', group.by = "DF.classifications_0.25_0.19_729")
+
+#Save doublets plot
+ggsave(
+  filename = "images/images_030/umap.doublets.png",
+  plot = db,
+  width = 6,
+  height = 4,
+  dpi = 300
+)
+
+#Number of singlets and doublets 
+table(pbmc.seurat.filtered@meta.data$DF.classifications_0.25_0.19_729)
+
+#Filter out doublets 
+
+
+
+
 
 #9. Annotate each cluster 
 #One reference based approach

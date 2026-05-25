@@ -17,7 +17,7 @@ Als doel van dit onderdeel wil ik voor mezelf een workflow opstellen zodat ik la
 Tijdens deze opdracht wordt er 32 uur besteed om de skill te leren. Op het einde van de opdracht zal ik reflecteren op deze planning en kijken wat er in de toekomst beter kan.
 
 | Aantal uur | Content |
-|----------------|--------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | Dag 1 |  |
 | 2h | Inlezen over het onderwerp, wat is de standaard workflow |
 | 1h | Inlezen over het onderwerp, wat zijn de methodes die kunnen worden gebruikt en in wat voor onderzoek wordt deze techniek gebruikt. |
@@ -125,7 +125,6 @@ str(pbmc.seurat.filtered)
 
 ```
 
-
 ```{r HVG, echo=TRUE, results='hide'}
 #Most of the time, the nfeatures value is between 2000 and 5000 
 pbmc.seurat.filtered <- FindVariableFeatures(pbmc.seurat.filtered, selection.method = "vst", nfeatures = 2000)
@@ -139,7 +138,8 @@ plot1 <- VariableFeaturePlot(pbmc.seurat.filtered)
 LabelPoints(plot = plot1, points = top10_HVG, repel = TRUE)
 ```
 
-Datascaling 
+Datascaling
+
 ```{r Data_scaling, echo=TRUE, results='hide', message=FALSE}
 #Acount for sources of variance 
 #Biologival sources: Difference in cell cycle 
@@ -151,6 +151,7 @@ pbmc.seurat.filtered <- ScaleData(pbmc.seurat.filtered, features = all.genes)
 ```
 
 PCA
+
 ```{r PCA, echo=TRUE, results='hide', message=FALSE}
 pbmc.seurat.filtered <- RunPCA(pbmc.seurat.filtered, features = VariableFeatures(object = pbmc.seurat.filtered))
 
@@ -167,20 +168,19 @@ Om te kijken hoeveel principle components gebruikt moeten worden in de downstrea
 ElbowPlot(pbmc.seurat.filtered, ndims = ncol(Embeddings(pbmc.seurat.filtered, "pca")))
 ```
 
-Uit de elbowplot heb ik ervoor gekozen om 15 PCs te gebruiken voor downstream analysis. De volgende stap is om de cellen te clusteren. 
+Uit de elbowplot heb ik ervoor gekozen om 15 PCs te gebruiken voor downstream analysis. De volgende stap is om de cellen te clusteren.
 
 ```{r cluster, message=FALSE}
 #Cells with similair feature expression patterns are clustered together 
 pbmc.seurat.filtered <- FindNeighbors(pbmc.seurat.filtered, dims = 1:15)
 ```
 
-Bij het clusteren kan er gekeken worden naar de resolutie van de clusters. Door verschillende resoluties in een grafiek te zien kan er gezien worden bij welke resolutie de clusters het beste eruit zien. 
+Bij het clusteren kan er gekeken worden naar de resolutie van de clusters. Door verschillende resoluties in een grafiek te zien kan er gezien worden bij welke resolutie de clusters het beste eruit zien.
 
 ```{r resolution_cluster, echo=TRUE, results='hide', message=FALSE}
 #See which resolution works best to distinct the cells into different clusters 
 pbmc.seurat.filtered <- FindClusters(pbmc.seurat.filtered, resolution = c(0.1, 0.3, 0.5, 0.7, 1))
 ```
-
 
 ```{r resolution_cluster_plot}
 #Plot to see which resolution works best 
@@ -203,6 +203,7 @@ DimPlot(pbmc.seurat.filtered, reduction = "umap")
 ```
 
 Annotating clusters
+
 ```{r annotating}
 #One reference based approach
 #Pick a reference that you expect to be in the dataset 
@@ -219,7 +220,7 @@ pbmc.seurat.filtered$singleR.labels <- prediction$labels[match(rownames(pbmc.seu
 DimPlot(pbmc.seurat.filtered, reduction = "umap", group.by = "singleR.labels")
 ```
 
-Check if cluster performance 
+Check if cluster performance
 
 ```{r prediction, echo=TRUE, results='hide', message=FALSE}
 #Calculate performance 
@@ -230,3 +231,29 @@ prediction$scores
 plotScoreHeatmap(prediction)
 ```
 
+De volgende stappen in de analyses zijn omschreven met tekst in figuren omdat ze veel lange stappen bevatten. Om deze grafieken ook uit te voeren kan naar het Rscript verwezen worden.
+
+## Removing doublets
+
+De doublets in de dataset werd verwijderd met de R package DoubletFinder. 3 parameters zijn belangrijk in deze package:
+
+- pK: 
+
+- PN: 
+
+- Exp
+
+De PN variable heeft niet veel invloed op de analyse, maar de pK waarde wel. Daarom is het belangrijk om de optimale pK waarde te berekenen. Nadat deze is berekend kunnen het aantal doublets berekend worden. 
+
+
+```{r foldertree,  out.width = "700px", fig.cap="Folder tree cursus dsfb1", echo = FALSE}
+knitr::include_graphics(
+  here::here(
+    "images", "images_030",
+    "umap.doublets.png"
+  )
+)
+
+```
+
+In dit figuur is te zien dat onder de gekozen stappen eerder in de analyse de optimale pK een waarde heeft van 0.19. 
