@@ -1,0 +1,2 @@
+In deze folder staan afbeeldingen die gemaakt zijn door het scRNAseq script wat zich bevindt in de scripts folder. 
+Sommige van deze afbeeldingen zijn gebruikt in het Rmarkdown bestand genaamd Vrije opdracht. 

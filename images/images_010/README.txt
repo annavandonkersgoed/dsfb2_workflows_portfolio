@@ -1,0 +1,1 @@
+In deze folder staan afbeeldingen die gebruikt zijn in het bestand Reproducible_Science_Article. 

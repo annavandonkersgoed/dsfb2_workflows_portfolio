@@ -1,0 +1,1 @@
+In deze folder bevinden zich afbeeldingen die gemaakt zijn van verschillende folder trees 
