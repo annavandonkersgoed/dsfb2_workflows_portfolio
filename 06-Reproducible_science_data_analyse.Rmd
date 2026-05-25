@@ -32,7 +32,7 @@ Celegans_dataset <- read_excel(here::here("raw_data", "Data010", "CE.LIQ.FLOW.06
 
 Na het inlezen van de data wordt de data gecontroleerd op wat voor type het is.
 
-```{r controle, eval = FALSE}
+```{r check_data, eval = FALSE}
 str(Celegans_dataset)
 ```
 
@@ -117,13 +117,13 @@ Uit de bovenstaande grafiek is te zien dat de positieve en vehicle controle voor
 
 ```{r controle}
 #Check wat de negatieve controle is voor het experiment 
-Celegans_dataset_no.na %>% filter(expType ==  "controlNegative") %>% select(compName, compConcentration) %>% slice(1)
+Celegans_dataset_no.na %>% filter(expType ==  "controlNegative") %>% select(compName, compConcentration) %>% head(1)
 
 #Check wat de vehicle controle is voor het experiment 
-Celegans_dataset_no.na %>% filter(expType ==  "controlVehicleA") %>% select(compName, compConcentration) %>% slice(1)
+Celegans_dataset_no.na %>% filter(expType ==  "controlVehicleA") %>% select(compName, compConcentration) %>% head(1)
 
 #check wat de positieve controle is voor het experiment 
-Celegans_dataset_no.na %>% filter(expType ==  "controlPositive") %>% select(compName, compConcentration) %>% slice(1)
+Celegans_dataset_no.na %>% filter(expType ==  "controlPositive") %>% select(compName, compConcentration) %>% head(1)
 
 ```
 
