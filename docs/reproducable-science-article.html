@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Reproducable science article | Portfolio Data Science for Biology 2</title>
+  <meta name="description" content="Chapter 8 Reproducable science article | Portfolio Data Science for Biology 2" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Reproducable science article | Portfolio Data Science for Biology 2" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Reproducable science article | Portfolio Data Science for Biology 2" />
+  
+  
+  
+
+<meta name="author" content="Anna van Donkersgoed" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="reproducable-science-data-analysis.html"/>
+<link rel="next" href="r-package.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="cirriculum-vitea.html"><a href="cirriculum-vitea.html"><i class="fa fa-check"></i><b>2</b> Cirriculum Vitea</a></li>
+<li class="chapter" data-level="3" data-path="plan-voor-de-toekomst.html"><a href="plan-voor-de-toekomst.html"><i class="fa fa-check"></i><b>3</b> Plan voor de toekomst</a></li>
+<li class="chapter" data-level="4" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html"><i class="fa fa-check"></i><b>4</b> Vrije opdracht</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#onderbouwing-gebasseerd-op-toekomstplan"><i class="fa fa-check"></i><b>4.1</b> Onderbouwing gebasseerd op toekomstplan</a></li>
+<li class="chapter" data-level="4.2" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#planning"><i class="fa fa-check"></i><b>4.2</b> Planning</a></li>
+<li class="chapter" data-level="4.3" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#uitwerking-vrije-opdracht"><i class="fa fa-check"></i><b>4.3</b> Uitwerking vrije opdracht</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#general-analysis"><i class="fa fa-check"></i><b>4.3.1</b> General analysis</a></li>
+<li class="chapter" data-level="4.3.2" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#removing-doublets"><i class="fa fa-check"></i><b>4.3.2</b> Removing doublets</a></li>
+<li class="chapter" data-level="4.3.3" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#exploratory-analysis"><i class="fa fa-check"></i><b>4.3.3</b> Exploratory analysis</a></li>
+<li class="chapter" data-level="4.3.4" data-path="vrije-opdracht.html"><a href="vrije-opdracht.html#voor-de-toekomst"><i class="fa fa-check"></i><b>4.3.4</b> Voor de toekomst</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-management-deel-1.html"><a href="data-management-deel-1.html"><i class="fa fa-check"></i><b>5</b> Data management deel 1</a></li>
+<li class="chapter" data-level="6" data-path="data-management-deel-2.html"><a href="data-management-deel-2.html"><i class="fa fa-check"></i><b>6</b> Data management deel 2</a></li>
+<li class="chapter" data-level="7" data-path="reproducable-science-data-analysis.html"><a href="reproducable-science-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Reproducable science data analysis</a></li>
+<li class="chapter" data-level="8" data-path="reproducable-science-article.html"><a href="reproducable-science-article.html"><i class="fa fa-check"></i><b>8</b> Reproducable science article</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="reproducable-science-article.html"><a href="reproducable-science-article.html#artikel-informatie"><i class="fa fa-check"></i><b>8.1</b> Artikel informatie</a></li>
+<li class="chapter" data-level="8.2" data-path="reproducable-science-article.html"><a href="reproducable-science-article.html#reproduceerbaarheid-articel"><i class="fa fa-check"></i><b>8.2</b> reproduceerbaarheid articel</a></li>
+<li class="chapter" data-level="8.3" data-path="reproducable-science-article.html"><a href="reproducable-science-article.html#reproduceerbaarheid-r-code"><i class="fa fa-check"></i><b>8.3</b> reproduceerbaarheid R code</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="r-package.html"><a href="r-package.html"><i class="fa fa-check"></i><b>9</b> R package</a></li>
+<li class="chapter" data-level="10" data-path="introductie-project-amr.html"><a href="introductie-project-amr.html"><i class="fa fa-check"></i><b>10</b> Introductie project AMR</a></li>
+<li class="chapter" data-level="11" data-path="paramized-markdown.html"><a href="paramized-markdown.html"><i class="fa fa-check"></i><b>11</b> Paramized markdown</a></li>
+<li class="chapter" data-level="12" data-path="referenties.html"><a href="referenties.html"><i class="fa fa-check"></i><b>12</b> Referenties</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Portfolio Data Science for Biology 2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reproducable-science-article" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Reproducable science article<a href="reproducable-science-article.html#reproducable-science-article" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In dit gedeelte van het portfolio wordt er gekeken naar reproduceerbaarheid vanuit artikelen die online staan. Het arikel dat gekozen is heet:,Small Intestine Bacterial Overgrowth is associated with increased Campylobacter and epithelial injury in duodenal biopsies of Bangladeshi children. Van dit artikel wordt een samenvatting gemaakt, waarna de reproduceerbaarheid wordt bepaald. Als laatst wordt de R code in het artikel uitgevoerd om te kijken of dezelfde resultaten verkregen kunnen worden.</p>
+<div id="artikel-informatie" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Artikel informatie<a href="reproducable-science-article.html#artikel-informatie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Titel: Small Intestine Bacterial Overgrowth is associated with increased Campylobacter and epithelial injury in duodenal biopsies of Bangladeshi children <span class="citation">(<a href="#ref-fahimSmallIntestineBacterial2024">Fahim et al. 2024</a>)</span>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11020352/">Link to website</a></p>
+<p>Environmental enteric dysfonction (EED) is een asymptomatisch syndroom waarbij de dunne darm ontstoken raakt en niet meer effectief nutriënten kan opnemen, wat kan zorgen voor een negatieve impact op de groei en ontwikkeling van kinderen. Dit syndroom komt veel voor in lagen- en middeninkomtslanden, waarbij slechte hygiëne vaak aanwezig is. Uit onderzoek is gebleken dat een deel van de kinderen met EED small intestine bacterial overgrowth (SIBO) hebben.SIBO is een dysbiose van de dunne darm waarbij er teveel bacteriën groeien.</p>
+<p>Het doel van dit onderzoek was om te bepalen of SIBO en EED een verband hadden in kinderen uit Bangladesh met als hypothese dat er een verband is en dat mucosa-adherende bacteriën significant zouden verschillen in SIBO positieve kinderen en SIBO negatieve kinderen.</p>
+<p>De kinderen werden geselecteerd op bepaalde ciriteria, esophagogastroduodenoscopy werd uitgevoerd en bbiopsies van de twaalfvingerige darm werden genomen. Deze biopsies werden gelijk onderzocht onder de microscoop en daarna bewaard voor DNA extractie, gevolgd door 16srRNA gene sequencing. Voor de histlogische analyses werden de biopsies gefixeerd en werden de weefselcoupes beoordeeld volgens een index gerelateerd met de mate van ontsteking van de dunne darm. SIBO werd getest door glucose-hydrogen-breath testing (GHBT) en de samples werden geanalyseerd door gas chromatografie. De samples werden ingedeeld in SIBO positief of SIBO negatief. Statistische analyses werden uitgevoerd door te kijken naar non-parametische testen, alphaa- en bèta diversiteit.</p>
+<p>Van de geteste kinderen hadden 12.7% SIBO, en er werd geen significant verschil gevonden tussen de histologische elementen van SIBO positieve en SIBO negatieve kinderen. Wat opviel was dat kinderen met SIBO een veel hogere abundantie hadden in Campylobacter dan kinderen zonder SIBO. Ook werd er een verband gevonden tussen SIBO en enterische ontstekingen bij EED kidneren, wat kan leiden tot de conclusie dat campylobacter in de duodenum epitheel kan beschadigen.</p>
+</div>
+<div id="reproduceerbaarheid-articel" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> reproduceerbaarheid articel<a href="reproducable-science-article.html#reproduceerbaarheid-articel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In het tweede gedeelte wordt het artikel beoordeeld op repoduceerbaarheid waarbij er gekeken wordt naar verschillende beoordelingscriteria.</p>
+<p>Over het algemeen is het artikel reproduceerbaar. Het doel is duidelijk weergeven aan het einde van de inleiding. Er wordt aangegeven op welke site de data gevonden kan worden en waar de data uit bestaat, zoals de metadata en code. Ook wordt er aangegeven in het artikel waar de studie is uitgevoerd en hoe de eerste uitgever bereikt kan worden. Ook staat er een etische statement en een funding statement en is de code makkelijk te gebruiken. De algemene indruk is dus erg positief.</p>
+</div>
+<div id="reproduceerbaarheid-r-code" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> reproduceerbaarheid R code<a href="reproducable-science-article.html#reproduceerbaarheid-r-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Om te kijken of de code ook reproduceerbaar wordt de code in de data availability uitgevoerd om te kijken of de resultaten hetzelfde zijn als de grafieken in het artikel. Bij het downloaden van de zit geen README bestand en is het ook niet duidelijk welk script voor welk doel was. In de zip folder zat een R script, een Rmarkdown bestand, een R object en 5 datasets. Het R script was onduidelijk, maar het Rmarkdown bestand was makkelijk te lezen, aangezien er veel pseudocoding werd gebruikt om de verschillende stappen uit te leggen.</p>
+<p>In het Rmarkdown bestand werden de verschillende analyses uitgevoerd. Nadat de data was ingeladen werden datasets samengevoegd en werden de verschillende taxa gefilterd. Daarna werden alpha en beta diversity analyses uitgevoerd om te kijken naar het verschil in SIBO positieve en SIBO negatieve kinderen. Alpha diversity werd gemeten met de Shannon index en de Wilcoxon test werd uitgevoerd om te kijken of er een singificant verschil is. Daarna werd er gekeken naar de beta diversity door een Principle Coordinates Analysis (PCoA) uit te voeren. Daarna werd er gekeken naar de significantie tussen de verschillende taxa met de de DESeq2 R package. The area under the curve bij 50% werd berekend en verdeeld in twee groepen, low en high. Daarna werden de histologische resultaten vergeleken met 16srRNA doormiddel van een PERMANOVA test, specifiek voor twee histologische parameters. Hierbij werden de alpha en beta diversity op dezelfde manier als eerder benoemd berekend. Als laatste in de anlayse werd de algemene microbiële compositie onderzocht. Hierbij werden de taxa op phylum level uitgeplot waarbij er naar de abudantie gekeken werd. Over het algemeen zou ik de leesbaarheid van de code op een schaal van 1 tot 5 een 3 geven, aangezien de pseudocoding veel uitleg gaf, maar er nog wel veel onduidelijk was waar sommige bestanden voor waren.</p>
+<p>Tijdens het uitvoeren van het markdown bestand kwam ik tegen wat kleine dingen aan. Als eerst zou ik de packages installeren in de code, aangezien dit nu handmatig gedaan moest worden. Daarnaast stonden de datasets in de code in een ander format dan in de folder. Ook kwamen sommige pathways met het inlezen van de data niet overeen met de folderstructuur. Dit zijn dingen die makkelijk verandert kunnen worden. Na het aanpassen van deze dingen kon de hele code in het Rmarkdown bestand uitgevoerd worden. De grafieken die uit de bestanden kwamen, leken op de grafieken in het artikel, maar waren toch net wat anders. In figuur x is de grafiek te zien die in het artikel stond en figuur x is de grafiek die gemaakt is door de R code te gebruiken. Ze lijken erg op elkaar, maar er zijn toch wat kleine verschillen.</p>
+<div class="figure"><span style="display:block;" id="fig:article"></span>
+<img src="images/images_010/Figure_in_article.jpg" alt="Figure in article" width="500px" />
+<p class="caption">
+Figure 8.1: Figure in article
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:code"></span>
+<img src="images/images_010/Figure_after_R_code_article.png" alt="Figure made by code" width="500px" />
+<p class="caption">
+Figure 8.2: Figure made by code
+</p>
+</div>
+<p>Op een schaal van 1 tot 5 zou ik de reproduceerbaarheid van de R code een 3 geven, aangezien de grafieken niet hetzelfde zijn, maar wel op elkaar lijken. Dit komt waarschijnlijk doordat er nog wat vervolg stappen zijn gedaan in het uitwerken van de data die niet in de code staan.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-fahimSmallIntestineBacterial2024" class="csl-entry">
+Fahim, Shah Mohammad, Jeffrey R. Donowitz, Ekaterina Smirnova, et al. 2024. <span>“Small <span>Intestine Bacterial Overgrowth</span> Is Associated with Increased <span>Campylobacter</span> and Epithelial Injury in Duodenal Biopsies of <span>Bangladeshi</span> Children.”</span> <em>PLoS Neglected Tropical Diseases</em> 18 (3): e0012023. <a href="https://doi.org/10.1371/journal.pntd.0012023">https://doi.org/10.1371/journal.pntd.0012023</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="reproducable-science-data-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-package.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
