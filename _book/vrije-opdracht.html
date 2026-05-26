@@ -359,13 +359,13 @@ div.csl-indent {
 <span id="cb8-3"><a href="vrije-opdracht.html#cb8-3" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="vrije-opdracht.html#cb8-4" tabindex="-1"></a><span class="co">#Look at distribution data </span></span>
 <span id="cb8-5"><a href="vrije-opdracht.html#cb8-5" tabindex="-1"></a><span class="fu">VlnPlot</span>(pbmc.seurat.obj, <span class="at">features =</span> <span class="fu">c</span>(<span class="st">&quot;nFeature_RNA&quot;</span>, <span class="st">&quot;nCount_RNA&quot;</span>, <span class="st">&quot;percent.mt&quot;</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="portfolio_DSFB2_files/figure-html/filter_seurat-1.png" alt="" width="672" /></p>
+<p><img src="portfolio_files/figure-html/filter_seurat-1.png" alt="" width="672" /></p>
 <p>Daarnaast wordt er gekeken naar verschillende correlaties. Er wordt verwacht dat er een correlatie is tussen het aantal genen en het aantal transcripties, maar dat er geen correlatie is tussen het aantal MT (percentage) en het aantal transcripties.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="vrije-opdracht.html#cb9-1" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb9-2"><a href="vrije-opdracht.html#cb9-2" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">FeatureScatter</span>(pbmc.seurat.obj, <span class="at">feature1 =</span> <span class="st">&quot;nCount_RNA&quot;</span>, <span class="at">feature2 =</span> <span class="st">&quot;percent.mt&quot;</span>)</span>
 <span id="cb9-3"><a href="vrije-opdracht.html#cb9-3" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">FeatureScatter</span>(pbmc.seurat.obj, <span class="at">feature1 =</span> <span class="st">&quot;nCount_RNA&quot;</span>, <span class="at">feature2 =</span> <span class="st">&quot;nFeature_RNA&quot;</span>)</span>
 <span id="cb9-4"><a href="vrije-opdracht.html#cb9-4" tabindex="-1"></a>plot1 <span class="sc">+</span> plot2</span></code></pre></div>
-<p><img src="portfolio_DSFB2_files/figure-html/correlation-1.png" alt="" width="672" /></p>
+<p><img src="portfolio_files/figure-html/correlation-1.png" alt="" width="672" /></p>
 <p>Zoals in de bovenstaande grafieken te zien is kloppen de verwachtingen, waardoor er verder kan worden gegagaan met het filteren. De lage kwaliteit cellen gebasseerd op het aantal genen en MT percentages worden eruit gefiltert.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="vrije-opdracht.html#cb10-1" tabindex="-1"></a><span class="co">#Threshhold is based on the violin plot </span></span>
 <span id="cb10-2"><a href="vrije-opdracht.html#cb10-2" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(pbmc.seurat.obj, <span class="at">subset =</span> nFeature_RNA <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">&amp;</span> nFeature_RNA <span class="sc">&lt;</span> <span class="dv">2500</span> <span class="sc">&amp;</span> </span>
@@ -386,7 +386,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="vrije-opdracht.html#cb17-1" tabindex="-1"></a><span class="co">#Plot variable features </span></span>
 <span id="cb17-2"><a href="vrije-opdracht.html#cb17-2" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">VariableFeaturePlot</span>(pbmc.seurat.filtered)</span>
 <span id="cb17-3"><a href="vrije-opdracht.html#cb17-3" tabindex="-1"></a><span class="fu">LabelPoints</span>(<span class="at">plot =</span> plot1, <span class="at">points =</span> top10_HVG, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="portfolio_DSFB2_files/figure-html/HVG_plot-1.png" alt="" width="672" /></p>
+<p><img src="portfolio_files/figure-html/HVG_plot-1.png" alt="" width="672" /></p>
 <p>Nadat de high variable genes zijn geplot moet de data is gescaled worden, aangezien sommige genen in het algemeen meer tot expressie komen dan andere genen.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="vrije-opdracht.html#cb18-1" tabindex="-1"></a><span class="co">#Acount for sources of variance </span></span>
 <span id="cb18-2"><a href="vrije-opdracht.html#cb18-2" tabindex="-1"></a><span class="co">#Biologival sources: Difference in cell cycle </span></span>
@@ -415,7 +415,7 @@ div.csl-indent {
 <p>Om te kijken hoeveel principle components gebruikt moeten worden in de downstream analyse kan er een elbowplot gemaakt worden, waarbij de “ellenboog” van de plot het aantal PCs is wat gebruikt kan worden.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="vrije-opdracht.html#cb22-1" tabindex="-1"></a><span class="co">#Determine only significant principle components which capture the signal in Down stream analysis </span></span>
 <span id="cb22-2"><a href="vrije-opdracht.html#cb22-2" tabindex="-1"></a><span class="fu">ElbowPlot</span>(pbmc.seurat.filtered, <span class="at">ndims =</span> <span class="fu">ncol</span>(<span class="fu">Embeddings</span>(pbmc.seurat.filtered, <span class="st">&quot;pca&quot;</span>)))</span></code></pre></div>
-<p><img src="portfolio_DSFB2_files/figure-html/elbow_plot-1.png" alt="" width="672" /></p>
+<p><img src="portfolio_files/figure-html/elbow_plot-1.png" alt="" width="672" /></p>
 <p>Uit de elbowplot heb ik ervoor gekozen om 15 PCs te gebruiken voor downstream analysis. De volgende stap is om de cellen te clusteren.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="vrije-opdracht.html#cb23-1" tabindex="-1"></a><span class="co">#Cells with similair feature expression patterns are clustered together </span></span>
 <span id="cb23-2"><a href="vrije-opdracht.html#cb23-2" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">FindNeighbors</span>(pbmc.seurat.filtered, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code></pre></div>
@@ -424,9 +424,9 @@ div.csl-indent {
 <span id="cb24-2"><a href="vrije-opdracht.html#cb24-2" tabindex="-1"></a>pbmc.seurat.filtered <span class="ot">&lt;-</span> <span class="fu">FindClusters</span>(pbmc.seurat.filtered, <span class="at">resolution =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="dv">1</span>))</span></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="vrije-opdracht.html#cb25-1" tabindex="-1"></a><span class="co">#Plot to see which resolution works best </span></span>
 <span id="cb25-2"><a href="vrije-opdracht.html#cb25-2" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc.seurat.filtered, <span class="at">group.by =</span> <span class="st">&quot;RNA_snn_res.1&quot;</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="portfolio_DSFB2_files/figure-html/resolution_cluster_plot-1.png" alt="" width="672" /></p>
+<p><img src="portfolio_files/figure-html/resolution_cluster_plot-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="vrije-opdracht.html#cb26-1" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc.seurat.filtered, <span class="at">group.by =</span> <span class="st">&quot;RNA_snn_res.0.3&quot;</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="portfolio_DSFB2_files/figure-html/resolution_cluster_plot-2.png" alt="" width="672" /></p>
+<p><img src="portfolio_files/figure-html/resolution_cluster_plot-2.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="vrije-opdracht.html#cb27-1" tabindex="-1"></a><span class="co">#Change resolution </span></span>
 <span id="cb27-2"><a href="vrije-opdracht.html#cb27-2" tabindex="-1"></a><span class="fu">Idents</span>(pbmc.seurat.filtered) <span class="ot">&lt;-</span> <span class="st">&quot;RNA_snn_res.0.3&quot;</span></span></code></pre></div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="vrije-opdracht.html#cb28-1" tabindex="-1"></a><span class="co">#Perform non-linear dimensionality reduction for display</span></span>
@@ -435,7 +435,7 @@ div.csl-indent {
 ## To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 ## This message will be shown once per session</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="vrije-opdracht.html#cb30-1" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc.seurat.filtered, <span class="at">reduction =</span> <span class="st">&quot;umap&quot;</span>)</span></code></pre></div>
-<p><img src="portfolio_DSFB2_files/figure-html/UMAN_plot-1.png" alt="" width="672" /></p>
+<p><img src="portfolio_files/figure-html/UMAN_plot-1.png" alt="" width="672" /></p>
 <p>Nadat de cellen zijn geclusterd worden ze geannoteerd. In dit geval worden de clusters vergeleken met een referentie dataset.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="vrije-opdracht.html#cb31-1" tabindex="-1"></a><span class="co">#One reference based approach</span></span>
 <span id="cb31-2"><a href="vrije-opdracht.html#cb31-2" tabindex="-1"></a><span class="co">#Pick a reference that you expect to be in the dataset </span></span>
@@ -447,12 +447,12 @@ div.csl-indent {
 <span id="cb31-8"><a href="vrije-opdracht.html#cb31-8" tabindex="-1"></a>        <span class="at">labels =</span> ref<span class="sc">$</span>label.main)</span>
 <span id="cb31-9"><a href="vrije-opdracht.html#cb31-9" tabindex="-1"></a>pbmc.seurat.filtered<span class="sc">$</span>singleR.labels <span class="ot">&lt;-</span> prediction<span class="sc">$</span>labels[<span class="fu">match</span>(<span class="fu">rownames</span>(pbmc.seurat.filtered<span class="sc">@</span>meta.data), <span class="fu">rownames</span>(prediction))]</span></code></pre></div>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="vrije-opdracht.html#cb32-1" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc.seurat.filtered, <span class="at">reduction =</span> <span class="st">&quot;umap&quot;</span>, <span class="at">group.by =</span> <span class="st">&quot;singleR.labels&quot;</span>)</span></code></pre></div>
-<p><img src="portfolio_DSFB2_files/figure-html/annotating_plot-1.png" alt="" width="672" /></p>
+<p><img src="portfolio_files/figure-html/annotating_plot-1.png" alt="" width="672" /></p>
 <p>Om de clustering te vallideren kunnen de scores berekent worden die aangeven hoe goed het celltype matcht met het celltype in de database. Hiervan kan een heathmap worden gemaakt. In de heatmap is te zien dat de hoge scoren (geel) matchen meet de labels.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="vrije-opdracht.html#cb33-1" tabindex="-1"></a><span class="co">#Calculate performance </span></span>
 <span id="cb33-2"><a href="vrije-opdracht.html#cb33-2" tabindex="-1"></a>prediction<span class="sc">$</span>scores</span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="vrije-opdracht.html#cb34-1" tabindex="-1"></a><span class="fu">plotScoreHeatmap</span>(prediction)</span></code></pre></div>
-<p><img src="portfolio_DSFB2_files/figure-html/prediction_plot-1.png" alt="" width="672" /></p>
+<p><img src="portfolio_files/figure-html/prediction_plot-1.png" alt="" width="672" /></p>
 <p>De volgende stappen in de analyses zijn omschreven met tekst in figuren omdat ze veel lange stappen bevatten. Om deze grafieken ook uit te voeren kan naar het Rscript verwezen worden.</p>
 </div>
 <div id="removing-doublets" class="section level3 hasAnchor" number="4.3.2">
