@@ -1,5 +1,9 @@
-book_filename: "portfolio"
-language: 
-  ui:
-    chapter_name: "Chapter "
-delete_merged_file: true
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">portfolio</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
